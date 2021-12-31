@@ -150,7 +150,7 @@ fly.BackgroundTransparency = 1
 fly.Text = "Fly(X)"
 fly.TextScaled = true
 fly.Size = UDim2.new(0.1, 0, 0.08, 0)
-fly.Position = UDim2.new(0.36, 0, 0.02, 0)
+fly.Position = UDim2.new(0.3, 0, 0.02, 0)
 fly.TextColor3 = Color3.fromRGB(0, 255, 0)
 
 FirePets.BorderSizePixel = 0
