@@ -158,7 +158,7 @@ FirePets.BackgroundTransparency = 1
 FirePets.Text = "Fire Pets"
 FirePets.TextScaled = true
 FirePets.Size = UDim2.new(0.1, 0, 0.08, 0)
-FirePets.Position = UDim2.new(0.48, 0, 0.02, 0)
+FirePets.Position = UDim2.new(0.5, 0, 0.02, 0)
 FirePets.TextColor3 = Color3.fromRGB(255, 115, 15)
 
 --Main Script
