@@ -21,6 +21,7 @@ local jump = Instance.new("TextButton")
 local jumpValue = Instance.new("TextBox")
 local fly = Instance.new("TextButton")
 local FirePets = Instance.new("TextButton")
+local ESP = Instance.new("TextButton")
 
 --Parenting
 app.Parent = pGUI
@@ -39,6 +40,7 @@ jump.Parent = hackList1
 jumpValue.Parent = hackList1
 fly.Parent = hackList1
 FirePets.Parent = hackList1
+ESP.Parent = hackList1
 
 --Positioning
 tabFrame.BorderSizePixel = 0
@@ -160,6 +162,14 @@ FirePets.TextScaled = true
 FirePets.Size = UDim2.new(0.1, 0, 0.08, 0)
 FirePets.Position = UDim2.new(0.56, 0, 0.02, 0)
 FirePets.TextColor3 = Color3.fromRGB(255, 115, 15)
+
+ESP.BorderSizePixel = 0
+ESP.BackgroundTransparency = 1
+ESP.Text = "ESP"
+ESP.TextScaled = true
+ESP.Size = UDim2.new(0.1, 0, 0.08, 0)
+ESP.Position = UDim2.new(0.74, 0, 0.02, 0)
+ESP.TextColor3 = Color3.fromRGB(0, 255, 0)
 
 --Main Script
 toggleON.MouseButton1Click:Connect(function()
@@ -294,6 +304,45 @@ end)
 
 FirePets.MouseButton1Click:Connect(function()
 	loadstring(game:HttpGet("https://pastebin.com/raw/PkT0DHGB", true))()
+end)
+
+ESP.MouseButton1Click:Connect(function()
+	local bg = Instance.new("BillboardGui")
+	local frame = Instance.new("Frame")
+	local LP = game.Players.LocalPlayer
+
+	for _,player in pairs(game.Players:GetPlayers()) do
+		if player.UserId == LP.UserId then
+			print("Skipped Local Player!")
+		elseif player.Character:FindFirstChild("HumanoidRootPart") then
+			local copyBG = bg:Clone()
+			local copyBG2 = bg:Clone()
+			local copyFrame = frame:Clone()
+			local copyFrame2 = frame:Clone()
+			copyBG.AlwaysOnTop = true
+			copyBG2.AlwaysOnTop = true
+			copyBG.Parent = player.Character.HumanoidRootPart
+			copyBG2.Parent = copyBG.Parent
+			copyFrame.Parent = copyBG
+			copyFrame2.Parent = copyBG2
+			copyFrame.BackgroundTransparency = 0.5
+			copyFrame.Size = UDim2.new(1, 0, 1, 0)
+			copyFrame2.Size = UDim2.new(1, 0, 1, 0)
+			copyBG.Size = UDim2.new(0, 50, 0, 50)
+			copyBG2.Size = UDim2.new(0, 10, 0, 10)
+			copyBG.Name = "copyBackground"
+			copyBG2.Name = "copyBackground2"
+			copyFrame.BackgroundTransparency = 0.5
+			copyFrame2.BackgroundTransparency = 0.5
+			copyFrame.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+			copyFrame2.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+			copyFrame.BorderSizePixel = 0
+			copyFrame2.BorderSizePixel = 0
+			print(tostring(player).." has ESP")
+		else
+			print(tostring(player).." did not have a HumanoidRootPart")
+		end
+	end
 end)
 
 tabHome.MouseButton1Click:Connect(function()
