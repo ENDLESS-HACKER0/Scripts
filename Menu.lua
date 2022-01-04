@@ -303,7 +303,7 @@ fly.MouseButton1Click:Connect(function()
 end)
 
 FirePets.MouseButton1Click:Connect(function()
-	loadstring(game:HttpGet("https://pastebin.com/raw/PkT0DHGB", true))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Fire%20Orb%20Pet.lua", true))()
 end)
 
 ESP.MouseButton1Click:Connect(function()
