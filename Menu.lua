@@ -25,6 +25,7 @@ local fly = Instance.new("TextButton")
 local FirePets = Instance.new("TextButton")
 local ESP = Instance.new("TextButton")
 local BangGUI = Instance.new("TextButton")
+local DaHoodGUI = Instance.new("TextButton")
 
 --Parenting
 app.Parent = pGUI
@@ -47,6 +48,7 @@ fly.Parent = hackList1
 FirePets.Parent = hackList1
 ESP.Parent = hackList1
 BangGUI.Parent = GUIlist
+DaHoodGUI.Parent = GUIlist
 
 --Positioning
 tabFrame.BorderSizePixel = 0
@@ -203,6 +205,14 @@ BangGUI.Size = UDim2.new(0.1, 0, 0.08, 0)
 BangGUI.Position = UDim2.new(0.02, 0, 0.02, 0)
 BangGUI.TextColor3 = Color3.fromRGB(0, 255, 0)
 
+DaHoodGUI.BorderSizePixel = 0
+DaHoodGUI.BackgroundTransparency = 1
+DaHoodGUI.Text = "Da Hood GUI"
+DaHoodGUI.TextScaled = true
+DaHoodGUI.Size = UDim2.new(0.1, 0, 0.08, 0)
+DaHoodGUI.Position = UDim2.new(0.2, 0, 0.02, 0)
+DaHoodGUI.TextColor3 = Color3.fromRGB(0, 255, 0)
+
 --Main Script
 toggleON.MouseButton1Click:Connect(function()
 	mf.Visible = true
@@ -236,6 +246,10 @@ end)
 
 BangGUI.MouseButton1Click:Connect(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Bang.lua", true))()
+end)
+
+DaHoodGUI.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Da%20Hood%20GUI.lua", true))()
 end)
 
 tabHome.MouseButton1Click:Connect(function()
