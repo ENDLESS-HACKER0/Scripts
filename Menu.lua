@@ -5,6 +5,7 @@ local pGUI = LP.PlayerGui
 --Tabs
 local tabHome = Instance.new("TextButton")
 local tabSimple = Instance.new("TextButton")
+local otherGUIs = Instance.new("TextButton")
 
 --GUI Vars
 local app = Instance.new("ScreenGui")	
@@ -12,6 +13,7 @@ local mf = Instance.new("Frame")
 local tabFrame = Instance.new("Frame")
 local homeFrame = Instance.new("Frame")
 local hackList1 = Instance.new("ScrollingFrame")
+local GUIlist = Instance.new("ScrollingFrame")
 local toggleOFF = Instance.new("TextButton")
 local toggleON = Instance.new("TextButton")
 local Intro = Instance.new("TextLabel")
@@ -22,18 +24,21 @@ local jumpValue = Instance.new("TextBox")
 local fly = Instance.new("TextButton")
 local FirePets = Instance.new("TextButton")
 local ESP = Instance.new("TextButton")
+local BangGUI = Instance.new("TextButton")
 
 --Parenting
 app.Parent = pGUI
 mf.Parent = app
 toggleON.Parent = app
 tabFrame.Parent = mf
+GUIlist.Parent = mf
 hackList1.Parent = mf
 homeFrame.Parent = mf
 toggleOFF.Parent = tabFrame
 tabHome.Parent = tabFrame
 Intro.Parent = homeFrame
 tabSimple.Parent = tabFrame
+otherGUIs.Parent = tabFrame
 speed.Parent = hackList1
 speedValue.Parent = hackList1
 jump.Parent = hackList1
@@ -41,6 +46,7 @@ jumpValue.Parent = hackList1
 fly.Parent = hackList1
 FirePets.Parent = hackList1
 ESP.Parent = hackList1
+BangGUI.Parent = GUIlist
 
 --Positioning
 tabFrame.BorderSizePixel = 0
@@ -56,6 +62,15 @@ hackList1.CanvasSize = UDim2.new(0, 0, 3, 0)
 hackList1.BackgroundTransparency = 0.2
 hackList1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 hackList1.Visible = false
+
+GUIlist.BorderSizePixel = 0
+GUIlist.Position = UDim2.new(0, 0, 0.2, 0)
+GUIlist.Size = UDim2.new(1, 0, 0.8, 0)
+GUIlist.ScrollBarImageColor3 = Color3.fromRGB(50, 50, 50)
+GUIlist.CanvasSize = UDim2.new(0, 0, 3, 0)
+GUIlist.BackgroundTransparency = 0.2
+GUIlist.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+GUIlist.Visible = false
 
 mf.Size = UDim2.new(0.5, 0, 0.5, 0)
 mf.Position = UDim2.new(0.25, 0, 0.25, 0)
@@ -92,6 +107,15 @@ Intro.BackgroundTransparency = 1
 Intro.TextColor3 = Color3.fromRGB(255, 255, 255)
 Intro.Text = "This is the Inset menu. To get Inset go to https://discord.gg/DTvh7BDhWt and get Inset Executer"
 Intro.TextScaled = true
+
+otherGUIs.BackgroundTransparency = 1
+otherGUIs.Size = UDim2.new(0.1, 0, 0.5, 0)
+otherGUIs.Position = UDim2.new(0.28, 0, 0.25, 0)
+otherGUIs.Text = "GUIs"
+otherGUIs.TextScaled = true
+otherGUIs.TextColor3 = Color3.fromRGB(255, 255, 255)
+otherGUIs.TextStrokeTransparency = 0
+otherGUIs.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 
 tabSimple.BackgroundTransparency = 1
 tabSimple.Size = UDim2.new(0.1, 0, 0.5, 0)
@@ -171,6 +195,14 @@ ESP.Size = UDim2.new(0.1, 0, 0.08, 0)
 ESP.Position = UDim2.new(0.74, 0, 0.02, 0)
 ESP.TextColor3 = Color3.fromRGB(0, 255, 0)
 
+BangGUI.BorderSizePixel = 0
+BangGUI.BackgroundTransparency = 1
+BangGUI.Text = "Bang GUI (R6)"
+BangGUI.TextScaled = true
+BangGUI.Size = UDim2.new(0.1, 0, 0.08, 0)
+BangGUI.Position = UDim2.new(0.02, 0, 0.02, 0)
+BangGUI.TextColor3 = Color3.fromRGB(0, 255, 0)
+
 --Main Script
 toggleON.MouseButton1Click:Connect(function()
 	mf.Visible = true
@@ -202,16 +234,33 @@ ESP.MouseButton1Click:Connect(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/ESP.lua", true))()
 end)
 
+BangGUI.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Bang.lua", true))()
+end)
+
 tabHome.MouseButton1Click:Connect(function()
 	tabHome.TextStrokeColor3 = Color3.fromRGB(0, 255, 0)
 	tabSimple.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	otherGUIs.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	hackList1.Visible = false
 	homeFrame.Visible = true
+	GUIlist.Visible = false
 end)
 
 tabSimple.MouseButton1Click:Connect(function()
 	tabHome.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	tabSimple.TextStrokeColor3 = Color3.fromRGB(0, 255, 0)
+	otherGUIs.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	hackList1.Visible = true
 	homeFrame.Visible = false
+	GUIlist.Visible = false
+end)
+
+otherGUIs.MouseButton1Click:Connect(function()
+	tabHome.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	tabSimple.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	otherGUIs.TextStrokeColor3 = Color3.fromRGB(0, 255, 0)
+	hackList1.Visible = false
+	homeFrame.Visible = false
+	GUIlist.Visible = true
 end)
