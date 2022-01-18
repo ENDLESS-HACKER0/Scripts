@@ -1,6 +1,10 @@
---Player Vars
 local LP = game.Players.LocalPlayer
 local pGUI = LP.PlayerGui
+
+--Destroy Old
+if pGUI:FindFirstChild("Inset") then
+	pGUI:FindFirstChild("Inset"):Destroy()
+end
 
 --Tabs
 local tabHome = Instance.new("TextButton")
@@ -50,7 +54,9 @@ ESP.Parent = hackList1
 BangGUI.Parent = GUIlist
 DaHoodGUI.Parent = GUIlist
 
---Positioning
+--Adjustments
+app.Name = "Inset"
+
 tabFrame.BorderSizePixel = 0
 tabFrame.Size = UDim2.new(1, 0, 0.2, 0)
 tabFrame.Position = UDim2.new(0, 0, 0, 0)
