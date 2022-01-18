@@ -31,6 +31,9 @@ local ESP = Instance.new("TextButton")
 local BangGUI = Instance.new("TextButton")
 local DaHoodGUI = Instance.new("TextButton")
 
+--Toggles
+local ESPtoggle = false
+
 --Parenting
 app.Parent = pGUI
 mf.Parent = app
@@ -201,7 +204,7 @@ ESP.Text = "ESP"
 ESP.TextScaled = true
 ESP.Size = UDim2.new(0.1, 0, 0.08, 0)
 ESP.Position = UDim2.new(0.74, 0, 0.02, 0)
-ESP.TextColor3 = Color3.fromRGB(0, 255, 0)
+ESP.TextColor3 = Color3.fromRGB(255, 0, 0)
 
 BangGUI.BorderSizePixel = 0
 BangGUI.BackgroundTransparency = 1
@@ -247,7 +250,16 @@ FirePets.MouseButton1Click:Connect(function()
 end)
 
 ESP.MouseButton1Click:Connect(function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/ESP.lua", true))()
+	ESPtoggle = not ESPtoggle
+	if ESPtoggle == true then
+		ESP.TextColor3 = Color3.fromRGB(0, 255, 0)
+		while ESPtoggle == true do
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/ESP.lua", true))()
+			wait(30)
+		end
+	elseif ESPtoggle == false then
+		ESP.TextColor3 = Color3.fromRGB(255, 0, 0)
+	end
 end)
 
 BangGUI.MouseButton1Click:Connect(function()
