@@ -10,6 +10,7 @@ end
 local tabHome = Instance.new("TextButton")
 local tabSimple = Instance.new("TextButton")
 local otherGUIs = Instance.new("TextButton")
+local Fun = Instance.new("TextButton")
 
 --GUI Vars
 local app = Instance.new("ScreenGui")	
@@ -18,6 +19,7 @@ local tabFrame = Instance.new("Frame")
 local homeFrame = Instance.new("Frame")
 local hackList1 = Instance.new("ScrollingFrame")
 local GUIlist = Instance.new("ScrollingFrame")
+local Funlist = Instance.new("ScrollingFrame")
 local toggleOFF = Instance.new("TextButton")
 local toggleON = Instance.new("TextButton")
 local Intro = Instance.new("TextLabel")
@@ -30,6 +32,7 @@ local FirePets = Instance.new("TextButton")
 local ESP = Instance.new("TextButton")
 local BangGUI = Instance.new("TextButton")
 local DaHoodGUI = Instance.new("TextButton")
+local Fireworks = Instance.new("TextButton")
 
 --Toggles
 local ESPtoggle = false
@@ -39,6 +42,7 @@ app.Parent = pGUI
 mf.Parent = app
 toggleON.Parent = app
 tabFrame.Parent = mf
+Funlist.Parent = mf
 GUIlist.Parent = mf
 hackList1.Parent = mf
 homeFrame.Parent = mf
@@ -47,15 +51,17 @@ tabHome.Parent = tabFrame
 Intro.Parent = homeFrame
 tabSimple.Parent = tabFrame
 otherGUIs.Parent = tabFrame
+Fun.Parent = tabFrame
 speed.Parent = hackList1
 speedValue.Parent = hackList1
 jump.Parent = hackList1
 jumpValue.Parent = hackList1
 fly.Parent = hackList1
-FirePets.Parent = hackList1
+FirePets.Parent = Funlist
 ESP.Parent = hackList1
 BangGUI.Parent = GUIlist
 DaHoodGUI.Parent = GUIlist
+Fireworks.Parent = Funlist
 
 --Adjustments
 app.Name = "Inset"
@@ -82,6 +88,15 @@ GUIlist.CanvasSize = UDim2.new(0, 0, 3, 0)
 GUIlist.BackgroundTransparency = 0.2
 GUIlist.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 GUIlist.Visible = false
+
+Funlist.BorderSizePixel = 0
+Funlist.Position = UDim2.new(0, 0, 0.2, 0)
+Funlist.Size = UDim2.new(1, 0, 0.8, 0)
+Funlist.ScrollBarImageColor3 = Color3.fromRGB(50, 50, 50)
+Funlist.CanvasSize = UDim2.new(0, 0, 3, 0)
+Funlist.BackgroundTransparency = 0.2
+Funlist.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Funlist.Visible = false
 
 mf.Size = UDim2.new(0.5, 0, 0.5, 0)
 mf.Position = UDim2.new(0.25, 0, 0.25, 0)
@@ -118,6 +133,15 @@ Intro.BackgroundTransparency = 1
 Intro.TextColor3 = Color3.fromRGB(255, 255, 255)
 Intro.Text = "This is the Inset menu. To get Inset go to https://discord.gg/DTvh7BDhWt and get Inset Executer"
 Intro.TextScaled = true
+
+Fun.BackgroundTransparency = 1
+Fun.Size = UDim2.new(0.1, 0, 0.5, 0)
+Fun.Position = UDim2.new(0.41, 0, 0.25, 0)
+Fun.Text = "Fun"
+Fun.TextScaled = true
+Fun.TextColor3 = Color3.fromRGB(255, 255, 255)
+Fun.TextStrokeTransparency = 0
+Fun.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 
 otherGUIs.BackgroundTransparency = 1
 otherGUIs.Size = UDim2.new(0.1, 0, 0.5, 0)
@@ -195,7 +219,7 @@ FirePets.BackgroundTransparency = 1
 FirePets.Text = "Fire Pets"
 FirePets.TextScaled = true
 FirePets.Size = UDim2.new(0.1, 0, 0.08, 0)
-FirePets.Position = UDim2.new(0.56, 0, 0.02, 0)
+FirePets.Position = UDim2.new(0.2, 0, 0.02, 0)
 FirePets.TextColor3 = Color3.fromRGB(255, 115, 15)
 
 ESP.BorderSizePixel = 0
@@ -203,7 +227,7 @@ ESP.BackgroundTransparency = 1
 ESP.Text = "ESP"
 ESP.TextScaled = true
 ESP.Size = UDim2.new(0.1, 0, 0.08, 0)
-ESP.Position = UDim2.new(0.74, 0, 0.02, 0)
+ESP.Position = UDim2.new(0.56, 0, 0.02, 0)
 ESP.TextColor3 = Color3.fromRGB(255, 0, 0)
 
 BangGUI.BorderSizePixel = 0
@@ -221,6 +245,14 @@ DaHoodGUI.TextScaled = true
 DaHoodGUI.Size = UDim2.new(0.1, 0, 0.08, 0)
 DaHoodGUI.Position = UDim2.new(0.2, 0, 0.02, 0)
 DaHoodGUI.TextColor3 = Color3.fromRGB(0, 255, 0)
+
+Fireworks.BorderSizePixel = 0
+Fireworks.BackgroundTransparency = 1
+Fireworks.Text = "FireWorks"
+Fireworks.TextScaled = true
+Fireworks.Size = UDim2.new(0.1, 0, 0.08, 0)
+Fireworks.Position = UDim2.new(0.02, 0, 0.02, 0)
+Fireworks.TextColor3 = Color3.fromRGB(0, 255, 0)
 
 --Main Script
 toggleON.MouseButton1Click:Connect(function()
@@ -270,29 +302,50 @@ DaHoodGUI.MouseButton1Click:Connect(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Da%20Hood%20GUI.lua", true))()
 end)
 
+Fireworks.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Fireworks.lua", true))()
+end)
+
 tabHome.MouseButton1Click:Connect(function()
 	tabHome.TextStrokeColor3 = Color3.fromRGB(0, 255, 0)
 	tabSimple.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	otherGUIs.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	Fun.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	hackList1.Visible = false
 	homeFrame.Visible = true
 	GUIlist.Visible = false
+	Funlist.Visible = false
 end)
 
 tabSimple.MouseButton1Click:Connect(function()
 	tabHome.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	tabSimple.TextStrokeColor3 = Color3.fromRGB(0, 255, 0)
 	otherGUIs.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	Fun.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	hackList1.Visible = true
 	homeFrame.Visible = false
 	GUIlist.Visible = false
+	Funlist.Visible = false
 end)
 
 otherGUIs.MouseButton1Click:Connect(function()
 	tabHome.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	tabSimple.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	otherGUIs.TextStrokeColor3 = Color3.fromRGB(0, 255, 0)
+	Fun.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 	hackList1.Visible = false
 	homeFrame.Visible = false
 	GUIlist.Visible = true
+	Funlist.Visible = false
+end)
+
+Fun.MouseButton1Click:Connect(function()
+	tabHome.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	tabSimple.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	otherGUIs.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	Fun.TextStrokeColor3 = Color3.fromRGB(0, 255, 0)
+	hackList1.Visible = false
+	homeFrame.Visible = false
+	GUIlist.Visible = false
+	Funlist.Visible = true
 end)
