@@ -99,10 +99,10 @@ FFP.Anchored = true
 BFP.Anchored = true
 
 --Position
-left.Position = char.Position + Vector3.new(5, 0, 0)
-right.Position = char.Position + Vector3.new(-5, 0, 0)
-front.Position = char.Position + Vector3.new(0, 0, 5)
-back.Position = char.Position + Vector3.new(0, 0, -5)
+left.Position = char.Position + Vector3.new(math.random(10, 15), 0, 0)
+right.Position = char.Position - Vector3.new(math.random(10, 15), 0, 0)
+front.Position = char.Position + Vector3.new(0, 0, math.random(10, 15))
+back.Position = char.Position - Vector3.new(0, 0, math.random(10, 15))
 
 LFP.Position = left.Position - Vector3.new(0, 2, 0)
 RFP.Position = right.Position - Vector3.new(0, 2, 0)
