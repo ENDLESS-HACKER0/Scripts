@@ -33,6 +33,7 @@ local ESP = Instance.new("TextButton")
 local BangGUI = Instance.new("TextButton")
 local DaHoodGUI = Instance.new("TextButton")
 local Fireworks = Instance.new("TextButton")
+local HumanoidProperties = Instance.new("TextButton")
 
 --Toggles
 local ESPtoggle = false
@@ -62,6 +63,7 @@ ESP.Parent = hackList1
 BangGUI.Parent = GUIlist
 DaHoodGUI.Parent = GUIlist
 Fireworks.Parent = Funlist
+HumanoidProperties.Parent = GUIlist
 
 --Adjustments
 app.Name = "Inset"
@@ -254,6 +256,14 @@ Fireworks.Size = UDim2.new(0.1, 0, 0.08, 0)
 Fireworks.Position = UDim2.new(0.02, 0, 0.02, 0)
 Fireworks.TextColor3 = Color3.fromRGB(0, 255, 0)
 
+HumanoidProperties.BorderSizePixel = 0
+HumanoidProperties.BackgroundTransparency = 1
+HumanoidProperties.Text = "Humanoid Properties"
+HumanoidProperties.TextScaled = true
+HumanoidProperties.Size = UDim2.new(0.1, 0, 0.08, 0)
+HumanoidProperties.Position = UDim2.new(0.38, 0, 0.02, 0)
+HumanoidProperties.TextColor3 = Color3.fromRGB(0, 255, 0)
+
 --Main Script
 toggleON.MouseButton1Click:Connect(function()
 	mf.Visible = true
@@ -304,6 +314,10 @@ end)
 
 Fireworks.MouseButton1Click:Connect(function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Fireworks.lua", true))()
+end)
+
+HumanoidProperties.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Humaniod%20Module.lua", true))()
 end)
 
 tabHome.MouseButton1Click:Connect(function()
