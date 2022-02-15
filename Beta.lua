@@ -16,6 +16,16 @@ local DropdownFrame = Instance.new("Frame")
 local World = Instance.new("TextButton")
 local WorldFrame = Instance.new("Frame")
 
+local Camara = Instance.new("TextButton")
+local CamaraFrame = Instance.new("Frame")
+
+local FOV = Instance.new("TextButton")
+local FOVFrame = Instance.new("Frame")
+local FOVValue = Instance.new("TextBox")
+local SetFOV = Instance.new("TextButton")
+
+local Terrian = Instance.new("TextButton")
+
 --Player
 local Player = Instance.new("TextButton")
 local PlayerFrame = Instance.new("Frame")
@@ -46,6 +56,9 @@ local PlayerBV = false
 local RenderBV = false
 local OtherBV = false
 
+--WorldToggles
+local CamaraBV = false
+local FOVBV = false
 --PlayerToggles
 local SpeedBV = false
 local JumpBV = false
@@ -58,6 +71,14 @@ local function CollapseWorld()
 	WorldBV = false
 	WorldFrame.Visible = false
 	World.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	
+	CamaraBV = false
+	CamaraFrame.Visible = false
+	Camara.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	
+	FOVBV = false
+	FOVFrame.Visible = false
+	FOV.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 end
 
 local function CollapsePlayer()
@@ -92,6 +113,12 @@ Toggle.Parent = Main
 DropdownFrame.Parent = Main
 World.Parent = DropdownFrame
 WorldFrame.Parent = Main
+Camara.Parent = WorldFrame
+CamaraFrame.Parent = Main
+FOV.Parent = CamaraFrame
+FOVFrame.Parent = Main
+FOVValue.Parent = FOVFrame
+SetFOV.Parent = FOVFrame
 Player.Parent = DropdownFrame
 PlayerFrame.Parent = Main
 Speed.Parent = PlayerFrame
@@ -243,6 +270,59 @@ Player.Size = UDim2.new(1, 0, 0.1, 0)
 Player.TextColor3 = Color3.fromRGB(255, 255, 255)
 Player.TextScaled = true
 
+SetFOV.Name = "Set FOV"
+SetFOV.Text = "Set"
+SetFOV.BorderSizePixel = 0
+SetFOV.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+SetFOV.Position = UDim2.new(0.1, 0, 0.5, 0)
+SetFOV.Size = UDim2.new(0.8, 0, 0.2, 0)
+SetFOV.TextColor3 = Color3.fromRGB(255, 255, 255)
+SetFOV.TextScaled = true
+
+FOVValue.Name = "FOV Value"
+FOVValue.PlaceholderText = "70"
+FOVValue.Text = ""
+FOVValue.BorderSizePixel = 0
+FOVValue.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+FOVValue.Position = UDim2.new(0.2, 0, 0.2, 0)
+FOVValue.Size = UDim2.new(0.6, 0, 0.2, 0)
+FOVValue.TextColor3 = Color3.fromRGB(255, 255, 255)
+FOVValue.TextScaled = true
+
+FOVFrame.Name = "FOV Frame"
+FOVFrame.BorderSizePixel = 0
+FOVFrame.Position = UDim2.new(0.525, 0, 0.1, 0)
+FOVFrame.Size = UDim2.new(0.15, 0, 0.3, 0)
+FOVFrame.BackgroundTransparency = 0
+FOVFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+FOVFrame.Visible = false
+
+FOV.Name = "FOV Toggle"
+FOV.Text = "FOV"
+FOV.BorderSizePixel = 0
+FOV.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+FOV.Position = UDim2.new(0, 0, 0, 0)
+FOV.Size = UDim2.new(1, 0, 0.265, 0)
+FOV.TextColor3 = Color3.fromRGB(255, 255, 255)
+FOV.TextScaled = true
+
+CamaraFrame.Name = "Camara Frame"
+CamaraFrame.BorderSizePixel = 0
+CamaraFrame.Position = UDim2.new(0.375, 0, 0.1, 0)
+CamaraFrame.Size = UDim2.new(0.15, 0, 0.3, 0)
+CamaraFrame.BackgroundTransparency = 0
+CamaraFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+CamaraFrame.Visible = false
+
+Camara.Name = "Camara Toggle"
+Camara.Text = "Camara"
+Camara.Size = UDim2.new(1, 0, 0.265, 0)
+Camara.Position = UDim2.new(0, 0, 0, 0)
+Camara.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+Camara.TextScaled = true
+Camara.TextColor3 = Color3.fromRGB(255, 255, 255)
+Camara.BorderSizePixel = 0
+
 WorldFrame.Name = "World Frame"
 WorldFrame.BorderSizePixel = 0
 WorldFrame.Position = UDim2.new(0.225, 0, 0.1, 0)
@@ -288,6 +368,38 @@ World.MouseButton1Click:Connect(function()
 		CollapseRender()
 		CollapseOther()
 	end
+end)
+
+Camara.MouseButton1Click:Connect(function()
+	if CamaraBV == false then
+		CamaraBV = true
+		CamaraFrame.Visible = true
+		Camara.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	elseif CamaraBV == true then
+		CamaraBV = false
+		CamaraFrame.Visible = false
+		Camara.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+		FOVBV = false
+		FOVFrame.Visible = false
+		FOV.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	end
+end)
+
+FOV.MouseButton1Click:Connect(function()
+	if FOVBV == false then
+		FOVBV = true
+		FOVFrame.Visible = true
+		FOV.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	elseif FOVBV == true then
+		FOVBV = false
+		FOVFrame.Visible = false
+		FOV.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	end
+end)
+
+SetFOV.MouseButton1Click:Connect(function()
+	print("FOV was set to "..tonumber(FOVValue.Text).." from "..game.Workspace.Camera.FieldOfView)
+	game.Workspace.Camera.FieldOfView = tonumber(FOVValue.Text)
 end)
 
 Player.MouseButton1Click:Connect(function()
