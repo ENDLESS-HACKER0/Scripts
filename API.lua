@@ -39,8 +39,8 @@ function API:track(player)
 	line.Parent = workspace
 	line.Attachment0 = A0
 	line.Attachment1 = A1
-	line.Width0 = 0.5
-	line.Width1 = 0.5
+	line.Width0 = 0.1
+	line.Width1 = 0.1
 	line.FaceCamera = true
 end
 
