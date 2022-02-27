@@ -19,7 +19,7 @@ function API:fire(color, color2)
 end
 
 function API:unfire()
-	LP.Character.Head:WaitForChild("Inset Fire")
+	LP.Character:WaitForChild("Head"):WaitForChild("Inset Fire"):Destroy()
 end
 
 return API
