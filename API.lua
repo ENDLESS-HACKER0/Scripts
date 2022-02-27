@@ -34,7 +34,7 @@ function API:trace(Player)
 			if person.UserId == LP.UserId then
 				print("Skipped Local Player!")
 			elseif person.Character:FindFirstChild("HumanoidRootPart") then
-				if person.Character.HumanoidRootPart:FindFirstChild("Inset Tracer") then
+				if person.Character.HumanoidRootPart:FindFirstChild("A1") then
 					print(tostring(person).." already has tracer")
 				else
 					local line  = Instance.new("Beam")
@@ -43,7 +43,8 @@ function API:trace(Player)
 
 					A0.Parent = LP.Character.HumanoidRootPart
 					A1.Parent = person.Character.HumanoidRootPart
-					
+					A1.Name = "A1"
+
 					line.Name = "Inset Tracer"
 					line.Parent = workspace
 					line.Attachment0 = A0
@@ -58,7 +59,7 @@ function API:trace(Player)
 		end
 	else
 		if game.Players[Player].Character:FindFirstChild("HumanoidRootPart") then
-			if game.Players[Player].Character:FindFirstChild("Inset Tracer") then
+			if game.Players[Player].Character:FindFirstChild("A1") then
 				print(Player.." already has a tracer")
 			else
 				local line  = Instance.new("Beam")
@@ -67,6 +68,7 @@ function API:trace(Player)
 
 				A0.Parent = LP.Character.HumanoidRootPart
 				A1.Parent = game.Players[Player].Character:WaitForChild("HumanoidRootPart")
+				A1.Name = "A1"
 
 				line.Name = "Inset Tracer"
 				line.Parent = workspace
