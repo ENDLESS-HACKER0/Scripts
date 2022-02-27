@@ -24,7 +24,24 @@ end
 
 function API:ToGame(place)
 	local TeleportService = game:GetService("TeleportService")
+	
 	TeleportService:Teleport(place, LP)
+end
+
+function API:track(player)
+	local line  = Instance.new("Beam")
+	local A0 = Instance.new("Attachment")
+	local A1 = Instance.new("Attachment")
+	
+	A0.Parent = LP.Character.HumanoidRootPart
+	A1.Parent = game.Players[player].Character:WaitForChild("HumanoidRootPart")
+	
+	line.Parent = workspace
+	line.Attachment0 = A0
+	line.Attachment1 = A1
+	line.Width0 = 0.5
+	line.Width1 = 0.5
+	line.FaceCamera = true
 end
 
 return API
