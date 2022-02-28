@@ -44,7 +44,6 @@ function API:trace(Player)
 					A0.Parent = LP.Character.HumanoidRootPart
 					A0.Name = tostring(person)
 					A1.Parent = person.Character.HumanoidRootPart
-					A1.Name = "A1"
 
 					line.Name = "Inset Tracer"
 					line.Parent = workspace
