@@ -34,9 +34,17 @@ function API:trace(Player)
 			if person.UserId == LP.UserId then
 				warn("Local Player Error")
 			elseif person.Character:FindFirstChild("HumanoidRootPart") then
-				if LP.Character.HumanoidRootPart:FindFirstChild(tostring(person)) then
+				if person.Character.HumanoidRootPart:FindFirstChild(tostring(person)) and LP.Character.HumanoidRootPart:FindFirstChild(tostring(person)) then
 					print(tostring(person).." already has tracer")
 				else
+					if person.Character.HumanoidRootPart:FindFirstChild(tostring(person)) then
+						person.Character.HumanoidRootPart:FindFirstChild(tostring(person)):Destroy()
+					end
+					
+					if LP.Character.HumanoidRootPart:FindFirstChild(tostring(person)) then
+						LP.Character.HumanoidRootPart:FindFirstChild(tostring(person)):Destroy()
+					end
+					
 					local line  = Instance.new("Beam")
 					local A0 = Instance.new("Attachment")
 					local A1 = Instance.new("Attachment")
@@ -44,7 +52,7 @@ function API:trace(Player)
 					A0.Parent = LP.Character.HumanoidRootPart
 					A0.Name = tostring(person)
 					A1.Parent = person.Character.HumanoidRootPart
-					A1.Name = "A1"
+					A1.Name = tostring(person)
 
 					line.Name = "Inset Tracer"
 					line.Parent = workspace
@@ -64,9 +72,17 @@ function API:trace(Player)
 			warn("Local Player Error")
 		else
 			if game.Players[Player].Character:FindFirstChild("HumanoidRootPart") then
-				if LP.Character.HumanoidRootPart:FindFirstChild(Player) then
+				if game.Players[Player].Character.HumanoidRootPart:FindFirstChild(Player) and LP.Character.HumanoidRootPart:FindFirstChild(Player) then
 					print(Player.." already has a tracer")
 				else
+					if game.Players[Player].Character.HumanoidRootPart:FindFirstChild(tostring(Player)) then
+						game.Players[Player].Character.HumanoidRootPart:FindFirstChild(tostring(Player)):Destroy()
+					end
+
+					if LP.Character.HumanoidRootPart:FindFirstChild(tostring(Player)) then
+						LP.Character.HumanoidRootPart:FindFirstChild(tostring(Player)):Destroy()
+					end
+					
 					local line  = Instance.new("Beam")
 					local A0 = Instance.new("Attachment")
 					local A1 = Instance.new("Attachment")
@@ -74,7 +90,8 @@ function API:trace(Player)
 					A0.Parent = LP.Character.HumanoidRootPart
 					A0.Name = Player
 					A1.Parent = game.Players[Player].Character:WaitForChild("HumanoidRootPart")
-
+					A1.Name = Player
+					
 					line.Name = "Inset Tracer"
 					line.Parent = workspace
 					line.Attachment0 = A0
