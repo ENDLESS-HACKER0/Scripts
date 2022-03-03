@@ -56,7 +56,7 @@ function API:trace(Player)
 					print("Added Tracer to "..tostring(person))
 				end
 			else
-				print(tostring(person).." did not have a HumanoidRootPart")
+				warn(tostring(person).." did not have a HumanoidRootPart")
 			end
 		end
 	else
@@ -85,7 +85,7 @@ function API:trace(Player)
 					print("Added Tracer to "..Player)
 				end
 			else
-				print(Player.." did not have a HumanoidRootPart")
+				warn(Player.." did not have a HumanoidRootPart")
 			end
 		end
 	end
