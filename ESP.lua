@@ -4,7 +4,7 @@ local LP = game.Players.LocalPlayer
 
 for _,player in pairs(game.Players:GetPlayers()) do
 	if player.UserId == LP.UserId then
-		print("Skipped Local Player!")
+		warn("Local Player Error")
 	elseif player.Character:FindFirstChild("HumanoidRootPart") then
 		if player.Character.HumanoidRootPart:FindFirstChild("copyBackground") then
 			print(tostring(player).." already has ESP")
@@ -45,10 +45,10 @@ for _,player in pairs(game.Players:GetPlayers()) do
 				copyFrame3.BorderSizePixel = 0
 				print("Added ESP to "..tostring(player))
 			else
-				print(tostring(player).." had a HumanoidRootPart but not a Head")
+				warn(tostring(player).." had a HumanoidRootPart but not a Head")
 			end
 		end
 	else
-		print(tostring(player).." did not have a HumanoidRootPart")
+		warn(tostring(player).." did not have a HumanoidRootPart")
 	end
 end
