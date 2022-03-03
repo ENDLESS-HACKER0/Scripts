@@ -1,3 +1,6 @@
+--Inset API
+local InsetAPI = loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/API.lua", true))()
+
 --Player Vars
 local LP = game.Players.LocalPlayer
 local pGUI = LP.PlayerGui
@@ -44,6 +47,7 @@ local SetJump = Instance.new("TextButton")
 local Render = Instance.new("TextButton")
 local RenderFrame = Instance.new("Frame")
 local ESP = Instance.new("TextButton")
+local tracers = Instance.new("TextButton")
 
 --Other
 local Other = Instance.new("TextButton")
@@ -65,17 +69,18 @@ local JumpBV = false
 
 --RenderToggles
 local ESPBV = false
+local tracersBV = false
 
 --Collapse
 local function CollapseWorld()
 	WorldBV = false
 	WorldFrame.Visible = false
 	World.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-	
+
 	CamaraBV = false
 	CamaraFrame.Visible = false
 	Camara.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-	
+
 	FOVBV = false
 	FOVFrame.Visible = false
 	FOV.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
@@ -85,11 +90,11 @@ local function CollapsePlayer()
 	PlayerBV = false
 	PlayerFrame.Visible = false
 	Player.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-	
+
 	Speed.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 	SpeedFrame.Visible = false
 	SpeedBV = false
-	
+
 	Jump.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 	JumpFrame.Visible = false
 	JumpBV = false
@@ -132,6 +137,7 @@ SetJump.Parent = JumpFrame
 Render.Parent = DropdownFrame
 RenderFrame.Parent = Main
 ESP.Parent = RenderFrame
+tracers.Parent = RenderFrame
 Other.Parent = DropdownFrame
 OtherFrame.Parent = Main
 
@@ -154,6 +160,15 @@ Other.Position = UDim2.new(0, 0, 0.3, 0)
 Other.Size = UDim2.new(1, 0, 0.1, 0)
 Other.TextColor3 = Color3.fromRGB(255, 255, 255)
 Other.TextScaled = true
+
+tracers.Name = "Tracers Toggle"
+tracers.Text = "Tracers"
+tracers.Size = UDim2.new(1, 0, 0.265, 0)
+tracers.Position = UDim2.new(0, 0, 0.265, 0)
+tracers.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+tracers.TextScaled = true
+tracers.TextColor3 = Color3.fromRGB(255, 255, 255)
+tracers.BorderSizePixel = 0
 
 ESP.Name = "ESP Toggle"
 ESP.Text = "ESP"
@@ -468,19 +483,6 @@ Render.MouseButton1Click:Connect(function()
 	end
 end)
 
-Other.MouseButton1Click:Connect(function()
-	if OtherBV == true then
-		CollapseOther()
-	elseif OtherBV == false then
-		OtherBV = true
-		OtherFrame.Visible = true
-		Other.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-		CollapseWorld()
-		CollapsePlayer()
-		CollapseRender()
-	end
-end)
-
 ESP.MouseButton1Click:Connect(function()
 	ESPBV = not ESPBV
 	if ESPBV == true then
@@ -491,6 +493,32 @@ ESP.MouseButton1Click:Connect(function()
 		end
 	elseif ESPBV == false then
 		ESP.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	end
+end)
+
+tracers.MouseButton1Click:Connect(function()
+	tracersBV = not tracersBV
+	if tracersBV == true then
+		tracers.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
+		while tracersBV == true do
+			InsetAPI:trace("All")
+			wait(30)
+		end
+	elseif tracersBV == false then
+		tracers.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	end
+end)
+
+Other.MouseButton1Click:Connect(function()
+	if OtherBV == true then
+		CollapseOther()
+	elseif OtherBV == false then
+		OtherBV = true
+		OtherFrame.Visible = true
+		Other.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+		CollapseWorld()
+		CollapsePlayer()
+		CollapseRender()
 	end
 end)
 
