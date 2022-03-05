@@ -110,23 +110,46 @@ end
 
 function API:RTX()
 	while wait(0.5) do
-		game.Lighting.ClockTime = 0
-		game.Lighting.ShadowSoftness = 0
-		game.Lighting.Brightness = 0
-		game.Lighting = "Future"
-		if LP.Character:FindFirstChild("HumanoidRootPart") then
-			if LP.Character.HumanoidRootPart:FindFirstChild("RTX Light Inset") then
-				LP.Character.HumanoidRootPart["RTX Light Inset"]:Destroy()
-				
-			else
-				local light = Instance.new("PointLight")
-				
-				light.Name = "RTX Light Inset"
-				light.Parent = LP.Character.HumanoidRootPart
-				light.Brightness = 0.75
-				light.Color = Color3.fromRGB(255, 255, 255)
-				light.Range = 10
-				light.Shadows = true
+		for _, child in pairs(game.Lighting:GetChildren()) do
+			if child:IsA("ColorCorrectionEffect") then
+				child:Destroy()
+				local CC = Instance.new("ColorCorrectionEffect")
+
+				CC.Parent = game.Lighting
+				CC.Brightness = 0
+				CC.Contrast = 0.2
+				CC.Saturation = 0.1
+				CC.TintColor = Color3.fromRGB(255, 250, 235)
+			end
+
+			if child:IsA("BloomEffect") then
+				child:Destroy()
+				local Bloom = Instance.new("BloomEffect")
+
+				Bloom.Parent = game.Lighting
+				Bloom.Intensity = 0.5
+				Bloom.Size = 50
+				Bloom.Threshold = 0.8
+			end
+
+			if child:IsA("SunRaysEffect") then
+				child:Destroy()
+				local SR = Instance.new("SunRaysEffect")
+
+				SR.Parent = game.Lighting
+				SR.Intensity = 0.035
+				SR.Spread = 0.4
+			end
+
+			if child:IsA("DepthOfFieldEffect") then
+				child:Destroy()
+				local DOF = Instance.new("DepthOfFieldEffect")
+
+				DOF.Parent = game.Lighting
+				DOF.FarIntensity = 0.5
+				DOF.FocusDistance = 15
+				DOF.InFocusRadius = 30
+				DOF.NearIntensity = 0
 			end
 		end
 	end
