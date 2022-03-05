@@ -3,7 +3,7 @@ local API = {}
 local LP = game.Players.LocalPlayer
 local camara = game.Workspace.Camera
 local pGUI = LP.PlayerGui
-local hum = LP.Character.Humanoid
+local hum = LP.Character:WaitForChild("Humanoid")
 
 function API:reset()
 	hum.Health = 0
@@ -28,8 +28,8 @@ function API:ToGame(place)
 	TeleportService:Teleport(place, LP)
 end
 
-function API:trace(Player)
-	if Player == "All" then
+function API:trace(target)
+	if target == "All" then
 		for _,person in pairs(game.Players:GetPlayers()) do
 			if person.UserId == LP.UserId then
 				warn("Local Player Error")
@@ -40,11 +40,11 @@ function API:trace(Player)
 					if person.Character.HumanoidRootPart:FindFirstChild(tostring(person)) then
 						person.Character.HumanoidRootPart:FindFirstChild(tostring(person)):Destroy()
 					end
-					
+
 					if LP.Character.HumanoidRootPart:FindFirstChild(tostring(person)) then
 						LP.Character.HumanoidRootPart:FindFirstChild(tostring(person)):Destroy()
 					end
-					
+
 					local line  = Instance.new("Beam")
 					local A0 = Instance.new("Attachment")
 					local A1 = Instance.new("Attachment")
@@ -68,30 +68,30 @@ function API:trace(Player)
 			end
 		end
 	else
-		if Player == LP.Name then
+		if target == LP.Name then
 			warn("Local Player Error")
 		else
-			if game.Players[Player].Character:FindFirstChild("HumanoidRootPart") then
-				if game.Players[Player].Character.HumanoidRootPart:FindFirstChild(Player) and LP.Character.HumanoidRootPart:FindFirstChild(Player) then
-					print(Player.." already has a tracer")
+			if game.Players[target].Character:FindFirstChild("HumanoidRootPart") then
+				if game.Players[target].Character.HumanoidRootPart:FindFirstChild(target) and LP.Character.HumanoidRootPart:FindFirstChild(target) then
+					print(target.." already has a tracer")
 				else
-					if game.Players[Player].Character.HumanoidRootPart:FindFirstChild(tostring(Player)) then
-						game.Players[Player].Character.HumanoidRootPart:FindFirstChild(tostring(Player)):Destroy()
+					if game.Players[target].Character.HumanoidRootPart:FindFirstChild(tostring(target)) then
+						game.Players[target].Character.HumanoidRootPart:FindFirstChild(tostring(target)):Destroy()
 					end
 
-					if LP.Character.HumanoidRootPart:FindFirstChild(tostring(Player)) then
-						LP.Character.HumanoidRootPart:FindFirstChild(tostring(Player)):Destroy()
+					if LP.Character.HumanoidRootPart:FindFirstChild(tostring(target)) then
+						LP.Character.HumanoidRootPart:FindFirstChild(tostring(target)):Destroy()
 					end
-					
+
 					local line  = Instance.new("Beam")
 					local A0 = Instance.new("Attachment")
 					local A1 = Instance.new("Attachment")
 
 					A0.Parent = LP.Character.HumanoidRootPart
-					A0.Name = Player
-					A1.Parent = game.Players[Player].Character:WaitForChild("HumanoidRootPart")
-					A1.Name = Player
-					
+					A0.Name = target
+					A1.Parent = game.Players[target].Character:WaitForChild("HumanoidRootPart")
+					A1.Name = target
+
 					line.Name = "Inset Tracer"
 					line.Parent = workspace
 					line.Attachment0 = A0
@@ -99,10 +99,34 @@ function API:trace(Player)
 					line.Width0 = 0.5
 					line.Width1 = 0.5
 					line.FaceCamera = true
-					print("Added Tracer to "..Player)
+					print("Added Tracer to "..target)
 				end
 			else
-				warn(Player.." did not have a HumanoidRootPart")
+				warn(target.." did not have a HumanoidRootPart")
+			end
+		end
+	end
+end
+
+function API:RTX()
+	while wait(0.5) do
+		game.Lighting.ClockTime = 0
+		game.Lighting.ShadowSoftness = 0
+		game.Lighting.Brightness = 0
+		game.Lighting = "Future"
+		if LP.Character:FindFirstChild("HumanoidRootPart") then
+			if LP.Character.HumanoidRootPart:FindFirstChild("RTX Light Inset") then
+				LP.Character.HumanoidRootPart["RTX Light Inset"]:Destroy()
+				
+			else
+				local light = Instance.new("PointLight")
+				
+				light.Name = "RTX Light Inset"
+				light.Parent = LP.Character.HumanoidRootPart
+				light.Brightness = 0.75
+				light.Color = Color3.fromRGB(255, 255, 255)
+				light.Range = 10
+				light.Shadows = true
 			end
 		end
 	end
