@@ -155,4 +155,40 @@ function API:RTX()
 	end
 end
 
+function API:warn(WarnMessage)
+	--Values
+	local Blinks = 10
+	local default = 0
+	local delayValue = 0.2
+
+	--Instances
+	local Main = Instance.new("ScreenGui")
+	local MessageBox = Instance.new("TextLabel")
+
+	--Parenting
+	Main.Parent = pGUI
+	MessageBox.Parent = Main
+
+	--Properties
+	MessageBox.Size = UDim2.new(0.2, 0, 0.1, 0)
+	MessageBox.Position = UDim2.new(0.4, 0, 0, 0)
+	MessageBox.TextScaled = true
+	MessageBox.Text = tostring(WarnMessage)
+	MessageBox.TextColor3 = Color3.fromRGB(255, 0, 0)
+	MessageBox.BackgroundTransparency = 1
+	MessageBox.Font = Enum.Font.SourceSansBold
+
+	while wait() do
+		if Blinks > default then
+			default = default + 1
+			wait(delayValue)
+			MessageBox.Visible = false
+			wait(delayValue)
+			MessageBox.Visible = true
+		elseif Blinks == default then
+			Main:Destroy()
+		end
+	end
+end
+
 return API
