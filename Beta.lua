@@ -1,3 +1,6 @@
+--UserInputService
+local UIS = game:GetService("UserInputService")
+
 --Inset API
 local InsetAPI = loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/API.lua", true))()
 
@@ -12,7 +15,6 @@ end
 
 --Vars
 local Main = Instance.new("ScreenGui")
-local Toggle = Instance.new("TextButton")
 local DropdownFrame = Instance.new("Frame")
 
 --World
@@ -114,7 +116,6 @@ end
 
 --Parenting
 Main.Parent = pGUI
-Toggle.Parent = Main
 DropdownFrame.Parent = Main
 World.Parent = DropdownFrame
 WorldFrame.Parent = Main
@@ -363,15 +364,6 @@ DropdownFrame.BackgroundTransparency = 0
 DropdownFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 DropdownFrame.Visible = false
 
-Toggle.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
-Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-Toggle.Size = UDim2.new(0.15, 0, 0.08, 0)
-Toggle.Position = UDim2.new(0.075, 0, 0.02, 0)
-Toggle.Name = "Toggle Button"
-Toggle.BorderSizePixel = 0
-Toggle.TextScaled = true
-Toggle.Text = "Inset"
-
 World.MouseButton1Click:Connect(function()
 	if WorldBV == true then
 		CollapseWorld()
@@ -485,6 +477,7 @@ end)
 
 ESP.MouseButton1Click:Connect(function()
 	ESPBV = not ESPBV
+
 	if ESPBV == true then
 		ESP.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
 		while ESPBV == true do
@@ -522,16 +515,30 @@ Other.MouseButton1Click:Connect(function()
 	end
 end)
 
-Toggle.MouseButton1Click:Connect(function()
-	if ToggleBV == false then
-		ToggleBV = true
-		DropdownFrame.Visible = true
-	elseif ToggleBV == true then
-		ToggleBV = false
-		DropdownFrame.Visible = false
-		CollapseWorld()
-		CollapsePlayer()
-		CollapseRender()
-		CollapseOther()
+UIS.InputBegan:Connect(function(input)
+	if input.KeyCode == Enum.KeyCode.Insert then
+		if ToggleBV == false then
+			ToggleBV = true
+			DropdownFrame.Visible = true
+		elseif ToggleBV == true then
+			ToggleBV = false
+			DropdownFrame.Visible = false
+			CollapseWorld()
+			CollapsePlayer()
+			CollapseRender()
+			CollapseOther()
+		end
+	elseif input.KeyCode == Enum.KeyCode.O then
+		ESPBV = not ESPBV
+
+		if ESPBV == true then
+			ESP.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
+			while ESPBV == true do
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/ESP.lua", true))()
+				wait(30)
+			end
+		elseif ESPBV == false then
+			ESP.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+		end
 	end
 end)
