@@ -109,48 +109,43 @@ function API:trace(target)
 end
 
 function API:RTX()
-	while wait(0.5) do
-		for _, child in pairs(game.Lighting:GetChildren()) do
-			if child:IsA("ColorCorrectionEffect") then
-				child:Destroy()
-				local CC = Instance.new("ColorCorrectionEffect")
+	for _, child in pairs(game.Lighting:GetChildren()) do
+		if child:IsA("ColorCorrectionEffect") then
+			child:Destroy()
+			local CC = Instance.new("ColorCorrectionEffect")
 
-				CC.Parent = game.Lighting
-				CC.Brightness = 0
-				CC.Contrast = 0.2
-				CC.Saturation = 0.1
-				CC.TintColor = Color3.fromRGB(255, 250, 235)
-			end
+			CC.Parent = game.Lighting
+			CC.Brightness = 0
+			CC.Contrast = 0.2
+			CC.Saturation = 0.1
+			CC.TintColor = Color3.fromRGB(255, 250, 235)
+		end
 
-			if child:IsA("BloomEffect") then
-				child:Destroy()
-				local Bloom = Instance.new("BloomEffect")
+		if child:IsA("BloomEffect") then
+			child:Destroy()
+			local Bloom = Instance.new("BloomEffect")
 
-				Bloom.Parent = game.Lighting
-				Bloom.Intensity = 0.5
-				Bloom.Size = 50
-				Bloom.Threshold = 0.8
-			end
+			Bloom.Parent = game.Lighting
+			Bloom.Intensity = 0.5
+			Bloom.Size = 50
+			Bloom.Threshold = 0.8
+		end
 
-			if child:IsA("SunRaysEffect") then
-				child:Destroy()
-				local SR = Instance.new("SunRaysEffect")
+		if child:IsA("SunRaysEffect") then
+			child:Destroy()
+			local SR = Instance.new("SunRaysEffect")
 
-				SR.Parent = game.Lighting
-				SR.Intensity = 0.035
-				SR.Spread = 0.4
-			end
+			SR.Parent = game.Lighting
+			SR.Intensity = 0.035
+			SR.Spread = 0.4
+		end
 
-			if child:IsA("DepthOfFieldEffect") then
-				child:Destroy()
-				local DOF = Instance.new("DepthOfFieldEffect")
+		if child:IsA("BlurEffect") then
+			child:Destroy()
+			local Blur = Instance.new("BlurEffect")
 
-				DOF.Parent = game.Lighting
-				DOF.FarIntensity = 0.5
-				DOF.FocusDistance = 15
-				DOF.InFocusRadius = 30
-				DOF.NearIntensity = 0
-			end
+			Blur.Parent = game.Lighting
+			Blur.Size = 3
 		end
 	end
 end
