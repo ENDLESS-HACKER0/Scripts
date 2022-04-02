@@ -5,10 +5,10 @@ local firefront = Instance.new("Fire")
 local fireback = Instance.new("Fire")
 
 --Workspace Fire
-fireleft.Parent = game.Workspace
-fireright.Parent = game.Workspace
-firefront.Parent = game.Workspace
-fireback.Parent = game.Workspace
+fireleft.Parent = game:GetService("Workspace")
+fireright.Parent = game:GetService("Workspace")
+firefront.Parent = game:GetService("Workspace")
+fireback.Parent = game:GetService("Workspace")
 
 --Fire Names
 fireleft.Name = "fireleft"
@@ -23,10 +23,10 @@ local thingfront = Instance.new("Weld")
 local thingback = Instance.new("Weld")
 
 --Weld Parenting
-thingleft.Parent = game.Workspace
-thingright.Parent = game.Workspace
-thingfront.Parent = game.Workspace
-thingback.Parent = game.Workspace
+thingleft.Parent = game:GetService("Workspace")
+thingright.Parent = game:GetService("Workspace")
+thingfront.Parent = game:GetService("Workspace")
+thingback.Parent = game:GetService("Workspace")
 
 --Blocks
 local left = Instance.new("Part")
@@ -35,7 +35,7 @@ local front = Instance.new("Part")
 local back = Instance.new("Part")
 
 --vars
-local player = game.Players.LocalPlayer
+local player = game:GetService("Players").LocalPlayer
 local char = player.Character.HumanoidRootPart
 
 --Names
@@ -45,10 +45,10 @@ front.Name = "front"
 back.Name = "back"
 
 --Parents
-left.Parent = game.Workspace
-right.Parent = game.Workspace
-front.Parent = game.Workspace
-back.Parent = game.Workspace
+left.Parent = game:GetService("Workspace")
+right.Parent = game:GetService("Workspace")
+front.Parent = game:GetService("Workspace")
+back.Parent = game:GetService("Workspace")
 
 --Part Invis
 left.Transparency = 1
