@@ -1,4 +1,4 @@
-local LP = game.Players.LocalPlayer
+local LP = game:GetService("Players").LocalPlayer
 local pGUI = LP.PlayerGui
 
 --Destroy Old
@@ -133,7 +133,7 @@ homeFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Intro.Size = UDim2.new(1, 0, 1, 0)
 Intro.BackgroundTransparency = 1
 Intro.TextColor3 = Color3.fromRGB(255, 255, 255)
-Intro.Text = "This is the Inset menu. To get Inset go to https://discord.gg/DTvh7BDhWt and get Inset Executer"
+Intro.Text = "This is the Inset menu. To get Inset go to https://bit.ly/Inset-Client and get Inset Executer"
 Intro.TextScaled = true
 
 Fun.BackgroundTransparency = 1
