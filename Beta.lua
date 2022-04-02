@@ -5,7 +5,7 @@ local UIS = game:GetService("UserInputService")
 local InsetAPI = loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/API.lua", true))()
 
 --Player Vars
-local LP = game.Players.LocalPlayer
+local LP = game:GetService("Players").LocalPlayer
 local pGUI = LP.PlayerGui
 
 --Destroy Old
@@ -405,8 +405,8 @@ FOV.MouseButton1Click:Connect(function()
 end)
 
 SetFOV.MouseButton1Click:Connect(function()
-	print("FOV was set to "..tonumber(FOVValue.Text).." from "..game.Workspace.Camera.FieldOfView)
-	game.Workspace.Camera.FieldOfView = tonumber(FOVValue.Text)
+	print("FOV was set to "..tonumber(FOVValue.Text).." from "..game:GetService("Workspace").Camera.FieldOfView)
+	game:GetService("Workspace").Camera.FieldOfView = tonumber(FOVValue.Text)
 end)
 
 Player.MouseButton1Click:Connect(function()
