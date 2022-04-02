@@ -29,7 +29,7 @@ local sparkleFBlock = Instance.new("Part")
 local sparkleBBlock = Instance.new("Part")
 
 --vars
-local player = game.Players.LocalPlayer
+local player = game:GetService("Players").LocalPlayer
 local char = player.Character.HumanoidRootPart
 
 --Fire Names
@@ -167,10 +167,10 @@ while wait() do
 		sparkleB.Parent = sparkleBBlock
 
 		--Parenting Part
-		sparkleLBlock.Parent = game.Workspace
-		sparkleRBlock.Parent = game.Workspace
-		sparkleFBlock.Parent = game.Workspace
-		sparkleBBlock.Parent = game.Workspace
+		sparkleLBlock.Parent = game:GetService("Workspace")
+		sparkleRBlock.Parent = game:GetService("Workspace")
+		sparkleFBlock.Parent = game:GetService("Workspace")
+		sparkleBBlock.Parent = game:GetService("Workspace")
 
 		--Anchoring Part
 		sparkleLBlock.Anchored = true
