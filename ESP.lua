@@ -1,6 +1,6 @@
 local bg = Instance.new("BillboardGui")
 local frame = Instance.new("Frame")
-local LP = game.Players.LocalPlayer
+local LP = game:GetService("Players").LocalPlayer
 
 for _,player in pairs(game.Players:GetPlayers()) do
 	if player.UserId == LP.UserId then
