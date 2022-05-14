@@ -1,6 +1,9 @@
 local API = {}
 
-local LP = game:GetService("Players").LocalPlayer
+local TS = game:GetService("TeleportService")
+local players = game:GetService('Players')
+local lighting = game:GetService('Lighting')
+local LP = players.LocalPlayer
 local camara = game:GetService("Workspace").Camera
 local pGUI = LP.PlayerGui
 local hum = LP.Character:WaitForChild("Humanoid")
@@ -39,14 +42,12 @@ function API:unfire()
 end
 
 function API:ToGame(place)
-	local TeleportService = game:GetService("TeleportService")
-
-	TeleportService:Teleport(place, LP)
+	TS:Teleport(place, LP)
 end
 
 function API:trace(target)
 	if target == "All" then
-		for _,person in pairs(game:GetService("Players"):GetPlayers()) do
+		for _,person in pairs(players:GetPlayers()) do
 			if person.UserId == LP.UserId then
 				warn("Local Player Error")
 			elseif person.Character:FindFirstChild("HumanoidRootPart") then
@@ -87,12 +88,12 @@ function API:trace(target)
 		if target == LP.Name then
 			warn("Local Player Error")
 		else
-			if game:GetService("Players")[target].Character:FindFirstChild("HumanoidRootPart") then
-				if game:GetService("Players")[target].Character.HumanoidRootPart:FindFirstChild(target) and LP.Character.HumanoidRootPart:FindFirstChild(target) then
+			if players[target].Character:FindFirstChild("HumanoidRootPart") then
+				if players[target].Character.HumanoidRootPart:FindFirstChild(target) and LP.Character.HumanoidRootPart:FindFirstChild(target) then
 					print(target.." already has a tracer")
 				else
-					if game:GetService("Players")[target].Character.HumanoidRootPart:FindFirstChild(tostring(target)) then
-						game:GetService("Players")[target].Character.HumanoidRootPart:FindFirstChild(tostring(target)):Destroy()
+					if players[target].Character.HumanoidRootPart:FindFirstChild(tostring(target)) then
+						players[target].Character.HumanoidRootPart:FindFirstChild(tostring(target)):Destroy()
 					end
 
 					if LP.Character.HumanoidRootPart:FindFirstChild(tostring(target)) then
@@ -105,7 +106,7 @@ function API:trace(target)
 
 					A0.Parent = LP.Character.HumanoidRootPart
 					A0.Name = target
-					A1.Parent = game:GetService("Players")[target].Character:WaitForChild("HumanoidRootPart")
+					A1.Parent = players[target].Character:WaitForChild("HumanoidRootPart")
 					A1.Name = target
 
 					line.Name = "Inset Tracer"
@@ -125,10 +126,10 @@ function API:trace(target)
 end
 
 function API:RTX()
-	game:GetService("Lighting").ShadowSoftness = 0
-	game:GetService("Lighting").GlobalShadows = true
+	lighting.ShadowSoftness = 0
+	lighting.GlobalShadows = true
 
-	for _, child in pairs(game:GetService("Lighting"):GetChildren()) do
+	for _, child in pairs(lighting:GetChildren()) do
 		if child:IsA("ColorCorrectionEffect") then
 			child:Destroy()
 		elseif child:IsA("BloomEffect") then
@@ -145,22 +146,22 @@ function API:RTX()
 	local SR = Instance.new("SunRaysEffect")
 	local Bloom = Instance.new("BloomEffect")
 
-	Blur.Parent = game:GetService("Lighting")
+	Blur.Parent = lighting
 	Blur.Size = 3
 	Blur.Name = "BlurINSET"
 
-	SR.Parent = game:GetService("Lighting")
+	SR.Parent = lighting
 	SR.Intensity = 0.035
 	SR.Spread = 0.4
 	SR.Name = "SunRayINSET"
 
-	Bloom.Parent = game:GetService("Lighting")
+	Bloom.Parent = lighting
 	Bloom.Intensity = 0.5
 	Bloom.Size = 50
 	Bloom.Threshold = 0.8
 	Bloom.Name = "BloomINSET"
 
-	CC.Parent = game:GetService("Lighting")
+	CC.Parent = lighting
 	CC.Brightness = 0
 	CC.Contrast = 0.2
 	CC.Saturation = 0.1
