@@ -10,12 +10,28 @@ function API:reset()
 end
 
 function API:fire(color, color2)
+	local main = Instance.new('Part')
 	local fire = Instance.new("Fire")
+	local fire_Light = Instance.new('PointLight')
+	local weld = Instance.new('Weld')
 
-	fire.Parent = LP.Character:WaitForChild("Head")
+	main.Parent = LP.Character:WaitForChild("Head")
+	main.Transparency = 1
+	main.Size = Vector3.new(1, 1, 1)
+	main.Massless = true
+	main.Position = LP.Character:WaitForChild("Head").Position
+	main.Name = "Inset Fire"
+
+	fire.Parent = main
 	fire.Color = color
 	fire.SecondaryColor = color2
-	fire.Name = "Inset Fire"
+
+	fire_Light.Parent = main
+	fire_Light.Color = color
+
+	weld.Part0 = LP.Character:WaitForChild("Head")
+	weld.Part1 = main
+	weld.Parent = main
 end
 
 function API:unfire()
@@ -109,6 +125,9 @@ function API:trace(target)
 end
 
 function API:RTX()
+	game:GetService("Lighting").ShadowSoftness = 0
+	game:GetService("Lighting").GlobalShadows = true
+
 	for _, child in pairs(game:GetService("Lighting"):GetChildren()) do
 		if child:IsA("ColorCorrectionEffect") then
 			child:Destroy()
@@ -145,44 +164,8 @@ function API:RTX()
 	CC.Brightness = 0
 	CC.Contrast = 0.2
 	CC.Saturation = 0.1
-	CC.TintColor = Color3.fromRGB(255, 250, 235)
+	CC.TintColor = Color3.fromRGB(255, 255, 255)
 	CC.Name = "ColorCorrectionINSET"
-end
-
-function API:warn(WarnMessage)
-	--Values
-	local Blinks = 10
-	local default = 0
-	local delayValue = 0.2
-
-	--Instances
-	local Main = Instance.new("ScreenGui")
-	local MessageBox = Instance.new("TextLabel")
-
-	--Parenting
-	Main.Parent = pGUI
-	MessageBox.Parent = Main
-
-	--Properties
-	MessageBox.Size = UDim2.new(0.2, 0, 0.1, 0)
-	MessageBox.Position = UDim2.new(0.4, 0, 0, 0)
-	MessageBox.TextScaled = true
-	MessageBox.Text = tostring(WarnMessage)
-	MessageBox.TextColor3 = Color3.fromRGB(255, 0, 0)
-	MessageBox.BackgroundTransparency = 1
-	MessageBox.Font = Enum.Font.SourceSansBold
-
-	while wait() do
-		if Blinks > default then
-			default = default + 1
-			wait(delayValue)
-			MessageBox.Visible = false
-			wait(delayValue)
-			MessageBox.Visible = true
-		elseif Blinks == default then
-			Main:Destroy()
-		end
-	end
 end
 
 return API
