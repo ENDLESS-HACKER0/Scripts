@@ -187,7 +187,7 @@ function API:TeamCheck(plr)
 			return 'Enemy'
 		end
 		if plr.Team == LP.Team then
-			return 'Teamate'
+			return 'Teammate'
 		end
 	elseif plr.Team == nil then
 		return 'No Team'
