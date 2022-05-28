@@ -1,6 +1,5 @@
 local API = {}
 
-local InsetAPI = loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/API.lua", true))()
 local TS = game:GetService("TeleportService")
 local players = game:GetService('Players')
 local lighting = game:GetService('Lighting')
@@ -63,64 +62,24 @@ function API:trace(target)
 						LP.Character.HumanoidRootPart:FindFirstChild(tostring(person)):Destroy()
 					end
 					
-					if InsetAPI:TeamCheck(person) == 'Teamate' then
-						local line  = Instance.new("Beam")
-						local A0 = Instance.new("Attachment")
-						local A1 = Instance.new("Attachment")
+					local line  = Instance.new("Beam")
+					local A0 = Instance.new("Attachment")
+					local A1 = Instance.new("Attachment")
 
-						A0.Parent = LP.Character.HumanoidRootPart
-						A0.Name = tostring(person)
-						A1.Parent = person.Character.HumanoidRootPart
-						A1.Name = tostring(person)
+					A0.Parent = LP.Character.HumanoidRootPart
+					A0.Name = tostring(person)
+					A1.Parent = person.Character.HumanoidRootPart
+					A1.Name = tostring(person)
 
-						line.Name = "Inset Tracer"
-						line.Parent = workspace
-						line.Attachment0 = A0
-						line.Attachment1 = A1
-						line.Width0 = 0.5
-						line.Width1 = 0.5
-						line.FaceCamera = true
-						line.Color = Color3.fromRGB(0, 255, 0)
-						print("Added Enemy Tracer to "..tostring(person))
-					elseif InsetAPI:TeamCheck(person) == 'Enemy' then
-						local line  = Instance.new("Beam")
-						local A0 = Instance.new("Attachment")
-						local A1 = Instance.new("Attachment")
-
-						A0.Parent = LP.Character.HumanoidRootPart
-						A0.Name = tostring(person)
-						A1.Parent = person.Character.HumanoidRootPart
-						A1.Name = tostring(person)
-
-						line.Name = "Inset Tracer"
-						line.Parent = workspace
-						line.Attachment0 = A0
-						line.Attachment1 = A1
-						line.Width0 = 0.5
-						line.Width1 = 0.5
-						line.FaceCamera = true
-						line.Color = Color3.fromRGB(255, 0, 0)
-						print("Added Team Tracer to "..tostring(person))
-					elseif InsetAPI:TeamCheck(person) == 'No Team' then
-						local line  = Instance.new("Beam")
-						local A0 = Instance.new("Attachment")
-						local A1 = Instance.new("Attachment")
-
-						A0.Parent = LP.Character.HumanoidRootPart
-						A0.Name = tostring(person)
-						A1.Parent = person.Character.HumanoidRootPart
-						A1.Name = tostring(person)
-
-						line.Name = "Inset Tracer"
-						line.Parent = workspace
-						line.Attachment0 = A0
-						line.Attachment1 = A1
-						line.Width0 = 0.5
-						line.Width1 = 0.5
-						line.FaceCamera = true
-						line.Color = Color3.fromRGB(255, 255, 255)
-						print("Added Tracer to "..tostring(person))
-					end
+					line.Name = "Inset Tracer"
+					line.Parent = workspace
+					line.Attachment0 = A0
+					line.Attachment1 = A1
+					line.Width0 = 0.5
+					line.Width1 = 0.5
+					line.FaceCamera = true
+					line.Color = Color3.fromRGB(255, 255, 255)
+					print("Added Tracer to "..tostring(person))
 				end
 			else
 				warn(tostring(person).." did not have a HumanoidRootPart")
@@ -142,64 +101,24 @@ function API:trace(target)
 						LP.Character.HumanoidRootPart:FindFirstChild(tostring(target)):Destroy()
 					end
 
-					if InsetAPI:TeamCheck(players[target]) == 'Teamate' then
-						local line  = Instance.new("Beam")
-						local A0 = Instance.new("Attachment")
-						local A1 = Instance.new("Attachment")
+					local line  = Instance.new("Beam")
+					local A0 = Instance.new("Attachment")
+					local A1 = Instance.new("Attachment")
 
-						A0.Parent = LP.Character.HumanoidRootPart
-						A0.Name = target
-						A1.Parent = players[target].Character.HumanoidRootPart
-						A1.Name = target
+					A0.Parent = LP.Character.HumanoidRootPart
+					A0.Name = target
+					A1.Parent = players[target].Character.HumanoidRootPart
+					A1.Name = target
 
-						line.Name = "Inset Tracer"
-						line.Parent = workspace
-						line.Attachment0 = A0
-						line.Attachment1 = A1
-						line.Width0 = 0.5
-						line.Width1 = 0.5
-						line.FaceCamera = true
-						line.Color = Color3.fromRGB(0, 255, 0)
-						print("Added Enemy Tracer to "..target)
-					elseif InsetAPI:TeamCheck(players[target]) == 'Enemy' then
-						local line  = Instance.new("Beam")
-						local A0 = Instance.new("Attachment")
-						local A1 = Instance.new("Attachment")
-
-						A0.Parent = LP.Character.HumanoidRootPart
-						A0.Name = target
-						A1.Parent = players[target].Character.HumanoidRootPart
-						A1.Name = target
-
-						line.Name = "Inset Tracer"
-						line.Parent = workspace
-						line.Attachment0 = A0
-						line.Attachment1 = A1
-						line.Width0 = 0.5
-						line.Width1 = 0.5
-						line.FaceCamera = true
-						line.Color = Color3.fromRGB(255, 0, 0)
-						print("Added Team Tracer to "..target)
-					elseif InsetAPI:TeamCheck(players[target]) == 'No Team' then
-						local line  = Instance.new("Beam")
-						local A0 = Instance.new("Attachment")
-						local A1 = Instance.new("Attachment")
-
-						A0.Parent = LP.Character.HumanoidRootPart
-						A0.Name = target
-						A1.Parent = players[target].Character.HumanoidRootPart
-						A1.Name = target
-
-						line.Name = "Inset Tracer"
-						line.Parent = workspace
-						line.Attachment0 = A0
-						line.Attachment1 = A1
-						line.Width0 = 0.5
-						line.Width1 = 0.5
-						line.FaceCamera = true
-						line.Color = Color3.fromRGB(255, 255, 255)
-						print("Added Tracer to "..target)
-					end
+					line.Name = "Inset Tracer"
+					line.Parent = workspace
+					line.Attachment0 = A0
+					line.Attachment1 = A1
+					line.Width0 = 0.5
+					line.Width1 = 0.5
+					line.FaceCamera = true
+					line.Color = Color3.fromRGB(255, 255, 255)
+					print("Added Tracer to "..target)
 				end
 			else
 				warn(target.." did not have a HumanoidRootPart")
