@@ -116,7 +116,6 @@ function API:trace(target)
 					line.Width0 = 0.5
 					line.Width1 = 0.5
 					line.FaceCamera = true
-					line.Color = Color3.fromRGB(255, 255, 255)
 					print("Added Tracer to "..target)
 				end
 			else
