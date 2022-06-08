@@ -1,8 +1,6 @@
---UserInputService
-local UIS = game:GetService("UserInputService")
-
---Inset API
+--Using
 local InsetAPI = loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/API.lua", true))()
+local UIS = game:GetService("UserInputService")
 
 --Player Vars
 local LP = game:GetService("Players").LocalPlayer
@@ -54,6 +52,7 @@ local tracers = Instance.new("TextButton")
 --Other
 local Other = Instance.new("TextButton")
 local OtherFrame = Instance.new("Frame")
+local fly = Instance.new("TextButton")
 
 --Toggled?
 local ToggleBV = false
@@ -70,8 +69,12 @@ local SpeedBV = false
 local JumpBV = false
 
 --RenderToggles
-local ESPBV = false
-local tracersBV = false
+if getgenv().ESPBV == nil then
+	getgenv().ESPBV = false
+end
+if getgenv().tracersBV == nil then
+	getgenv().tracersBV = false
+end
 
 --Collapse
 local function CollapseWorld()
@@ -141,9 +144,19 @@ ESP.Parent = RenderFrame
 tracers.Parent = RenderFrame
 Other.Parent = DropdownFrame
 OtherFrame.Parent = Main
+fly.Parent = OtherFrame
 
 --Properties
 Main.Name = "Inset Beta"
+
+fly.Name = "Fly Toggle"
+fly.Text = "Fly"
+fly.Size = UDim2.new(1, 0, 0.265, 0)
+fly.Position = UDim2.new(0, 0, 0, 0)
+fly.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+fly.TextScaled = true
+fly.TextColor3 = Color3.fromRGB(255, 255, 255)
+fly.BorderSizePixel = 0
 
 OtherFrame.Name = "Other Frame"
 OtherFrame.BorderSizePixel = 0
@@ -170,6 +183,11 @@ tracers.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 tracers.TextScaled = true
 tracers.TextColor3 = Color3.fromRGB(255, 255, 255)
 tracers.BorderSizePixel = 0
+if getgenv().tracersBV == true then
+	tracers.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
+elseif getgenv().tracersBV == false then
+	tracers.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+end
 
 ESP.Name = "ESP Toggle"
 ESP.Text = "ESP"
@@ -179,6 +197,11 @@ ESP.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 ESP.TextScaled = true
 ESP.TextColor3 = Color3.fromRGB(255, 255, 255)
 ESP.BorderSizePixel = 0
+if getgenv().ESPBV == true then
+	ESP.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
+elseif getgenv().ESPBV == false then
+	ESP.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+end
 
 RenderFrame.Name = "Render Frame"
 RenderFrame.BorderSizePixel = 0
@@ -476,28 +499,28 @@ Render.MouseButton1Click:Connect(function()
 end)
 
 ESP.MouseButton1Click:Connect(function()
-	ESPBV = not ESPBV
+	getgenv().ESPBV = not getgenv().ESPBV
 
-	if ESPBV == true then
+	if getgenv().ESPBV == true then
 		ESP.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
-		while ESPBV == true do
+		while getgenv().ESPBV == true do
 			loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/ESP.lua", true))()
 			wait(30)
 		end
-	elseif ESPBV == false then
+	elseif getgenv().ESPBV == false then
 		ESP.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 	end
 end)
 
 tracers.MouseButton1Click:Connect(function()
-	tracersBV = not tracersBV
-	if tracersBV == true then
+	getgenv().tracersBV = not getgenv().tracersBV
+	if getgenv().tracersBV == true then
 		tracers.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
-		while tracersBV == true do
+		while getgenv().tracersBV == true do
 			InsetAPI:trace("All")
 			wait(30)
 		end
-	elseif tracersBV == false then
+	elseif getgenv().tracersBV == false then
 		tracers.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 	end
 end)
@@ -515,6 +538,13 @@ Other.MouseButton1Click:Connect(function()
 	end
 end)
 
+fly.MouseButton1Click:Connect(function()
+	fly.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
+	wait(0.1)
+	fly.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Fly.lua", true))()
+end)
+
 UIS.InputBegan:Connect(function(input)
 	if input.KeyCode == Enum.KeyCode.Insert then
 		if ToggleBV == false then
@@ -527,18 +557,6 @@ UIS.InputBegan:Connect(function(input)
 			CollapsePlayer()
 			CollapseRender()
 			CollapseOther()
-		end
-	elseif input.KeyCode == Enum.KeyCode.O then
-		ESPBV = not ESPBV
-
-		if ESPBV == true then
-			ESP.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
-			while ESPBV == true do
-				loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/ESP.lua", true))()
-				wait(30)
-			end
-		elseif ESPBV == false then
-			ESP.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 		end
 	end
 end)
