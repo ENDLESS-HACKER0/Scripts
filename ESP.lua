@@ -58,11 +58,11 @@ for _,player in pairs(game.Players:GetPlayers()) do
 		if player.Character.HumanoidRootPart:FindFirstChild("copyBackground") then
 			print("Updating "..tostring(player).."'s ESP")
 			if InsetAPI:TeamCheck(player) == "Teammate" then
-				player.Character.HumanoidRootPart.copyBackground.TeamColorFrame.Color = Color3.fromRGB(0, 255, 106)
+				player.Character.HumanoidRootPart.copyBackground.TeamColorFrame.BackgroundColor3 = Color3.fromRGB(0, 255, 106)
 			elseif InsetAPI:TeamCheck(player) == "Enemy" then
-				player.Character.HumanoidRootPart.copyBackground.TeamColorFrame.Color = Color3.fromRGB(100, 0, 0)
+				player.Character.HumanoidRootPart.copyBackground.TeamColorFrame.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
 			elseif InsetAPI:TeamCheck(player) == "No Team" then
-				player.Character.HumanoidRootPart.copyBackground.TeamColorFrame.Color = Color3.fromRGB(0, 150, 0)
+				player.Character.HumanoidRootPart.copyBackground.TeamColorFrame.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
 			end
 		end
 		if player.Character:FindFirstChild("Head") then
