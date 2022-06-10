@@ -64,22 +64,23 @@ for _,player in pairs(game.Players:GetPlayers()) do
 			elseif InsetAPI:TeamCheck(player) == "No Team" then
 				player.Character.HumanoidRootPart.copyBackground.TeamColorFrame.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
 			end
-		end
-		if player.Character:FindFirstChild("Head") then
-			if InsetAPI:TeamCheck(player) ~= "No Team" then
-				if InsetAPI:TeamCheck(player) == "Enemy" then
-					AddESP(player, "Enemy")
-					print("Added Other Team ESP to "..tostring(player))
-				elseif InsetAPI:TeamCheck(player) == "Teammate" then
-					AddESP(player, "Teammate")
-					print("Added Team ESP to "..tostring(player))
+		else
+			if player.Character:FindFirstChild("Head") then
+				if InsetAPI:TeamCheck(player) ~= "No Team" then
+					if InsetAPI:TeamCheck(player) == "Enemy" then
+						AddESP(player, "Enemy")
+						print("Added Other Team ESP to "..tostring(player))
+					elseif InsetAPI:TeamCheck(player) == "Teammate" then
+						AddESP(player, "Teammate")
+						print("Added Team ESP to "..tostring(player))
+					end
+				else
+					AddESP(player, "No Team")
+					print("Added ESP to "..tostring(player))
 				end
 			else
-				AddESP(player, "No Team")
-				print("Added ESP to "..tostring(player))
+				warn(tostring(player).." had a HumanoidRootPart but not a Head")
 			end
-		else
-			warn(tostring(player).." had a HumanoidRootPart but not a Head")
 		end
 	else
 		warn(tostring(player).." did not have a HumanoidRootPart")
