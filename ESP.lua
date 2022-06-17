@@ -8,61 +8,63 @@ local LP = game:GetService("Players").LocalPlayer
 
 --Main Function
 function AddESP(player, team)
-	local copyBG = bg:Clone()
+	local copyBG1 = bg:Clone()
 	local copyBG2 = bg:Clone()
-	local copyBG3 = bg:Clone()
-	local copyFrame = frame:Clone()
+	local copyFrame1 = frame:Clone()
 	local copyFrame2 = frame:Clone()
-	local copyFrame3 = frame:Clone()
-	copyBG.AlwaysOnTop = true
-	copyBG2.AlwaysOnTop = true
-	copyBG3.AlwaysOnTop = false
-	copyBG.Parent = player.Character.HumanoidRootPart
-	copyBG2.Parent = copyBG.Parent
-	copyBG3.Parent = player.Character.Head
-	copyFrame.Parent = copyBG
+	local highlight = Instance.new("Highlight")
+	highlight.Parent = player.Character
+	highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+	highlight.Enabled = true
+	highlight.FillTransparency = 0.5
+	highlight.OutlineTransparency = 1
+	copyBG1.AlwaysOnTop = true
+	copyBG2.AlwaysOnTop = false
+	copyBG1.Parent = player.Character.HumanoidRootPart
+	copyBG2.Parent = player.Character.Head
+	copyFrame1.Parent = copyBG1
 	copyFrame2.Parent = copyBG2
-	copyFrame3.Parent = copyBG3
-	copyFrame.Size = UDim2.new(1, 0, 1, 0)
+	copyFrame1.Size = UDim2.new(1, 0, 1, 0)
 	copyFrame2.Size = UDim2.new(1, 0, 1, 0)
-	copyFrame3.Size = UDim2.new(1, 0, 1, 0)
-	copyBG.Size = UDim2.new(0, 50, 0, 50)
-	copyBG2.Size = UDim2.new(0, 10, 0, 10)
-	copyBG3.Size = UDim2.new(0, 30, 0, 30)
-	copyFrame.Name = "TeamColorFrame"
-	copyBG.Name = "copyBackground"
-	copyBG2.Name = "copyBackground2"
-	copyBG2.Name = "copyBackground3"
-	copyFrame.BackgroundTransparency = 0.5
-	copyFrame2.BackgroundTransparency = 0.5
-	copyFrame3.BackgroundTransparency = 0
+	copyBG1.Size = UDim2.new(0, 50, 0, 50)
+	copyBG2.Size = UDim2.new(0, 30, 0, 30)
+	highlight.Name = "TeamColorHighlight"
+	copyBG1.Name = "TeamColorFrame"
+	copyBG2.Name = "copyBackground"
+	copyFrame1.BackgroundTransparency = 0.5
+	copyFrame2.BackgroundTransparency = 0
+	copyFrame1.Name = "ColorFrame"
 	if team == "Teammate" then
-		copyFrame.BackgroundColor3 = Color3.fromRGB(0, 255, 106)
+		highlight.FillColor = Color3.fromRGB(0, 255, 106)
+		copyFrame1.BackgroundColor3 = Color3.fromRGB(0, 255, 106)
 	elseif team == "Enemy" then
-		copyFrame.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
+		highlight.FillColor = Color3.fromRGB(255, 0, 0)
+		copyFrame1.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
 	elseif team == "No Team" then
-		copyFrame.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+		highlight.FillColor = Color3.fromRGB(150, 150, 150)
+		copyFrame1.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
 	end
-	copyFrame2.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-	copyFrame3.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
-	copyFrame.BorderSizePixel = 0
+	copyFrame2.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+	copyFrame1.BorderSizePixel = 0
 	copyFrame2.BorderSizePixel = 0
-	copyFrame3.BorderSizePixel = 0
 end
 
 --Main
 for _,player in pairs(game.Players:GetPlayers()) do
 	if player.UserId == LP.UserId then
 		warn("Local Player Error")
-	elseif player.Character:FindFirstChild("HumanoidRootPart") then
-		if player.Character.HumanoidRootPart:FindFirstChild("copyBackground") then
+	elseif player.Character:FindFirstChild("HumanoidRootPart") and player.Character:FindFirstChild("Humanoid").Health > 0 then
+		if player.Character.HumanoidRootPart:FindFirstChild("TeamColorFrame") and player.Character:FindFirstChild("TeamColorHighlight") then
 			print("Updating "..tostring(player).."'s ESP")
 			if InsetAPI:TeamCheck(player) == "Teammate" then
-				player.Character.HumanoidRootPart.copyBackground.TeamColorFrame.BackgroundColor3 = Color3.fromRGB(0, 255, 106)
+				player.Character.TeamColorHighlight.FillColor = Color3.fromRGB(0, 255, 106)
+				player.Character.HumanoidRootPart.TeamColorFrame.ColorFrame.BackgroundColor3 = Color3.fromRGB(0, 255, 106)
 			elseif InsetAPI:TeamCheck(player) == "Enemy" then
-				player.Character.HumanoidRootPart.copyBackground.TeamColorFrame.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
+				player.Character.TeamColorHighlight.FillColor = Color3.fromRGB(255, 0, 0)
+				player.Character.HumanoidRootPart.TeamColorFrame.ColorFrame.BackgroundColor3 = Color3.fromRGB(100, 0, 0)
 			elseif InsetAPI:TeamCheck(player) == "No Team" then
-				player.Character.HumanoidRootPart.copyBackground.TeamColorFrame.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+				player.Character.TeamColorHighlight.FillColor = Color3.fromRGB(150, 150, 150)
+				player.Character.HumanoidRootPart.TeamColorFrame.ColorFrame.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
 			end
 		else
 			if player.Character:FindFirstChild("Head") then
