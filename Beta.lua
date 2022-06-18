@@ -14,24 +14,26 @@ end
 --Vars
 local Main = Instance.new("ScreenGui")
 local DropdownFrame = Instance.new("Frame")
+local DFGrid = Instance.new("UIGridLayout")
 
 --World
 local World = Instance.new("TextButton")
 local WorldFrame = Instance.new("Frame")
+local WorldGrid = Instance.new("UIGridLayout")
 
 local Camara = Instance.new("TextButton")
 local CamaraFrame = Instance.new("Frame")
+local CamaraGrid = Instance.new("UIGridLayout")
 
 local FOV = Instance.new("TextButton")
 local FOVFrame = Instance.new("Frame")
 local FOVValue = Instance.new("TextBox")
 local SetFOV = Instance.new("TextButton")
 
-local Terrian = Instance.new("TextButton")
-
 --Player
 local Player = Instance.new("TextButton")
 local PlayerFrame = Instance.new("Frame")
+local PlayerGrid = Instance.new("UIGridLayout")
 
 local Speed = Instance.new("TextButton")
 local SpeedFrame = Instance.new("Frame")
@@ -46,13 +48,27 @@ local SetJump = Instance.new("TextButton")
 --Render
 local Render = Instance.new("TextButton")
 local RenderFrame = Instance.new("Frame")
+local RenderGrid = Instance.new("UIGridLayout")
 local ESP = Instance.new("TextButton")
 local tracers = Instance.new("TextButton")
 
 --Other
 local Other = Instance.new("TextButton")
 local OtherFrame = Instance.new("Frame")
+local OtherGrid = Instance.new("UIGridLayout")
 local fly = Instance.new("TextButton")
+
+--Number of Buttons
+local MainBtns = 4
+
+local RenderBtns = 2
+
+local OtherBtns = 1
+
+local PlayerBtns = 2
+
+local WorldBtns = 1
+local CameraBtns = 1
 
 --Toggled?
 local ToggleBV = false
@@ -120,16 +136,20 @@ end
 --Parenting
 Main.Parent = pGUI
 DropdownFrame.Parent = Main
+DFGrid.Parent = DropdownFrame
 World.Parent = DropdownFrame
 WorldFrame.Parent = Main
+WorldGrid.Parent = WorldFrame
 Camara.Parent = WorldFrame
 CamaraFrame.Parent = Main
+CamaraGrid.Parent = CamaraFrame
 FOV.Parent = CamaraFrame
 FOVFrame.Parent = Main
 FOVValue.Parent = FOVFrame
 SetFOV.Parent = FOVFrame
 Player.Parent = DropdownFrame
 PlayerFrame.Parent = Main
+PlayerGrid.Parent = PlayerFrame
 Speed.Parent = PlayerFrame
 SpeedFrame.Parent = Main
 SpeedValue.Parent = SpeedFrame
@@ -140,10 +160,12 @@ JumpValue.Parent = JumpFrame
 SetJump.Parent = JumpFrame
 Render.Parent = DropdownFrame
 RenderFrame.Parent = Main
+RenderGrid.Parent = RenderFrame
 ESP.Parent = RenderFrame
 tracers.Parent = RenderFrame
 Other.Parent = DropdownFrame
 OtherFrame.Parent = Main
+OtherGrid.Parent = OtherFrame
 fly.Parent = OtherFrame
 
 --Properties
@@ -151,34 +173,32 @@ Main.Name = "Inset Beta"
 
 fly.Name = "Fly Toggle"
 fly.Text = "Fly"
-fly.Size = UDim2.new(1, 0, 0.265, 0)
-fly.Position = UDim2.new(0, 0, 0, 0)
 fly.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 fly.TextScaled = true
 fly.TextColor3 = Color3.fromRGB(255, 255, 255)
 fly.BorderSizePixel = 0
 
-OtherFrame.Name = "Other Frame"
-OtherFrame.BorderSizePixel = 0
-OtherFrame.Position = UDim2.new(0.225, 0, 0.34, 0)
-OtherFrame.Size = UDim2.new(0.15, 0, 0.3, 0)
-OtherFrame.BackgroundTransparency = 0
-OtherFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-OtherFrame.Visible = false
+WorldGrid.Name = "World Grid"
+WorldGrid.CellPadding = UDim2.new(0, 0, 0, 0)
+WorldGrid.CellSize = UDim2.new(1, 0, 1 / WorldBtns, 0)
 
-Other.Name = "Other Toggle"
-Other.Text = "Other"
-Other.BorderSizePixel = 0
-Other.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Other.Position = UDim2.new(0, 0, 0.3, 0)
-Other.Size = UDim2.new(1, 0, 0.1, 0)
-Other.TextColor3 = Color3.fromRGB(255, 255, 255)
-Other.TextScaled = true
+WorldFrame.Name = "World Frame"
+WorldFrame.BorderSizePixel = 0
+WorldFrame.Position = UDim2.new(0.225, 0, 0.34, 0)
+WorldFrame.Size = UDim2.new(0.15, 0, 0.08 * WorldBtns, 0)
+WorldFrame.BackgroundTransparency = 0
+WorldFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+WorldFrame.Visible = false
+
+World.Name = "World Toggle"
+World.Text = "World"
+World.BorderSizePixel = 0
+World.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+World.TextColor3 = Color3.fromRGB(255, 255, 255)
+World.TextScaled = true
 
 tracers.Name = "Tracers Toggle"
 tracers.Text = "Tracers"
-tracers.Size = UDim2.new(1, 0, 0.265, 0)
-tracers.Position = UDim2.new(0, 0, 0.265, 0)
 tracers.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 tracers.TextScaled = true
 tracers.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -191,8 +211,6 @@ end
 
 ESP.Name = "ESP Toggle"
 ESP.Text = "ESP"
-ESP.Size = UDim2.new(1, 0, 0.265, 0)
-ESP.Position = UDim2.new(0, 0, 0, 0)
 ESP.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 ESP.TextScaled = true
 ESP.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -203,10 +221,14 @@ elseif getgenv().ESPBV == false then
 	ESP.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 end
 
+RenderGrid.Name = "Render Grid"
+RenderGrid.CellPadding = UDim2.new(0, 0, 0, 0)
+RenderGrid.CellSize = UDim2.new(1, 0, 1 / RenderBtns, 0)
+
 RenderFrame.Name = "Render Frame"
 RenderFrame.BorderSizePixel = 0
 RenderFrame.Position = UDim2.new(0.225, 0, 0.26, 0)
-RenderFrame.Size = UDim2.new(0.15, 0, 0.3, 0)
+RenderFrame.Size = UDim2.new(0.15, 0, 0.08 * RenderBtns, 0)
 RenderFrame.BackgroundTransparency = 0
 RenderFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 RenderFrame.Visible = false
@@ -215,8 +237,6 @@ Render.Name = "Render Toggle"
 Render.Text = "Render"
 Render.BorderSizePixel = 0
 Render.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Render.Position = UDim2.new(0, 0, 0.2, 0)
-Render.Size = UDim2.new(1, 0, 0.1, 0)
 Render.TextColor3 = Color3.fromRGB(255, 255, 255)
 Render.TextScaled = true
 
@@ -241,7 +261,7 @@ JumpValue.TextScaled = true
 
 JumpFrame.Name = "Jump Frame"
 JumpFrame.BorderSizePixel = 0
-JumpFrame.Position = UDim2.new(0.375, 0, 0.26, 0)
+JumpFrame.Position = UDim2.new(0.375, 0, 0.18, 0)
 JumpFrame.Size = UDim2.new(0.15, 0, 0.3, 0)
 JumpFrame.BackgroundTransparency = 0
 JumpFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
@@ -249,8 +269,6 @@ JumpFrame.Visible = false
 
 Jump.Name = "Jump Toggle"
 Jump.Text = "Jump"
-Jump.Size = UDim2.new(1, 0, 0.265, 0)
-Jump.Position = UDim2.new(0, 0, 0.265, 0)
 Jump.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 Jump.TextScaled = true
 Jump.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -277,7 +295,7 @@ SpeedValue.TextScaled = true
 
 SpeedFrame.Name = "Speed Frame"
 SpeedFrame.BorderSizePixel = 0
-SpeedFrame.Position = UDim2.new(0.375, 0, 0.18, 0)
+SpeedFrame.Position = UDim2.new(0.375, 0, 0.26, 0)
 SpeedFrame.Size = UDim2.new(0.15, 0, 0.3, 0)
 SpeedFrame.BackgroundTransparency = 0
 SpeedFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
@@ -285,17 +303,19 @@ SpeedFrame.Visible = false
 
 Speed.Name = "Speed Toggle"
 Speed.Text = "Speed"
-Speed.Size = UDim2.new(1, 0, 0.265, 0)
-Speed.Position = UDim2.new(0, 0, 0, 0)
 Speed.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 Speed.TextScaled = true
 Speed.TextColor3 = Color3.fromRGB(255, 255, 255)
 Speed.BorderSizePixel = 0
 
+PlayerGrid.Name = "Player Grid"
+PlayerGrid.CellPadding = UDim2.new(0, 0, 0, 0)
+PlayerGrid.CellSize = UDim2.new(1, 0, 1 / PlayerBtns, 0)
+
 PlayerFrame.Name = "Player Frame"
 PlayerFrame.BorderSizePixel = 0
 PlayerFrame.Position = UDim2.new(0.225, 0, 0.18, 0)
-PlayerFrame.Size = UDim2.new(0.15, 0, 0.3, 0)
+PlayerFrame.Size = UDim2.new(0.15, 0, 0.08 * PlayerBtns, 0)
 PlayerFrame.BackgroundTransparency = 0
 PlayerFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 PlayerFrame.Visible = false
@@ -304,8 +324,6 @@ Player.Name = "Player Toggle"
 Player.Text = "Player"
 Player.BorderSizePixel = 0
 Player.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Player.Position = UDim2.new(0, 0, 0.1, 0)
-Player.Size = UDim2.new(1, 0, 0.1, 0)
 Player.TextColor3 = Color3.fromRGB(255, 255, 255)
 Player.TextScaled = true
 
@@ -330,7 +348,7 @@ FOVValue.TextScaled = true
 
 FOVFrame.Name = "FOV Frame"
 FOVFrame.BorderSizePixel = 0
-FOVFrame.Position = UDim2.new(0.525, 0, 0.1, 0)
+FOVFrame.Position = UDim2.new(0.525, 0, 0.34, 0)
 FOVFrame.Size = UDim2.new(0.15, 0, 0.3, 0)
 FOVFrame.BackgroundTransparency = 0
 FOVFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
@@ -340,49 +358,55 @@ FOV.Name = "FOV Toggle"
 FOV.Text = "FOV"
 FOV.BorderSizePixel = 0
 FOV.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-FOV.Position = UDim2.new(0, 0, 0, 0)
-FOV.Size = UDim2.new(1, 0, 0.265, 0)
 FOV.TextColor3 = Color3.fromRGB(255, 255, 255)
 FOV.TextScaled = true
 
+CamaraGrid.Name = "Camera Grid"
+CamaraGrid.CellPadding = UDim2.new(0, 0, 0, 0)
+CamaraGrid.CellSize = UDim2.new(1, 0, 1 / CameraBtns, 0)
+
 CamaraFrame.Name = "Camara Frame"
 CamaraFrame.BorderSizePixel = 0
-CamaraFrame.Position = UDim2.new(0.375, 0, 0.1, 0)
-CamaraFrame.Size = UDim2.new(0.15, 0, 0.3, 0)
+CamaraFrame.Position = UDim2.new(0.375, 0, 0.34, 0)
+CamaraFrame.Size = UDim2.new(0.15, 0, 0.08 * CameraBtns, 0)
 CamaraFrame.BackgroundTransparency = 0
 CamaraFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 CamaraFrame.Visible = false
 
 Camara.Name = "Camara Toggle"
 Camara.Text = "Camara"
-Camara.Size = UDim2.new(1, 0, 0.265, 0)
-Camara.Position = UDim2.new(0, 0, 0, 0)
 Camara.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 Camara.TextScaled = true
 Camara.TextColor3 = Color3.fromRGB(255, 255, 255)
 Camara.BorderSizePixel = 0
 
-WorldFrame.Name = "World Frame"
-WorldFrame.BorderSizePixel = 0
-WorldFrame.Position = UDim2.new(0.225, 0, 0.1, 0)
-WorldFrame.Size = UDim2.new(0.15, 0, 0.3, 0)
-WorldFrame.BackgroundTransparency = 0
-WorldFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-WorldFrame.Visible = false
+OtherGrid.Name = "Other Grid"
+OtherGrid.CellPadding = UDim2.new(0, 0, 0, 0)
+OtherGrid.CellSize = UDim2.new(1, 0, 1 / OtherBtns, 0)
 
-World.Name = "World Toggle"
-World.Text = "World"
-World.BorderSizePixel = 0
-World.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-World.Position = UDim2.new(0, 0, 0, 0)
-World.Size = UDim2.new(1, 0, 0.1, 0)
-World.TextColor3 = Color3.fromRGB(255, 255, 255)
-World.TextScaled = true
+OtherFrame.Name = "Other Frame"
+OtherFrame.BorderSizePixel = 0
+OtherFrame.Position = UDim2.new(0.225, 0, 0.1, 0)
+OtherFrame.Size = UDim2.new(0.15, 0, 0.08 * OtherBtns, 0)
+OtherFrame.BackgroundTransparency = 0
+OtherFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+OtherFrame.Visible = false
+
+Other.Name = "Other Toggle"
+Other.Text = "Other"
+Other.BorderSizePixel = 0
+Other.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Other.TextColor3 = Color3.fromRGB(255, 255, 255)
+Other.TextScaled = true
+
+DFGrid.Name = "Dropdown Grid"
+DFGrid.CellPadding = UDim2.new(0, 0, 0, 0)
+DFGrid.CellSize = UDim2.new(1, 0, 1 / MainBtns, 0)
 
 DropdownFrame.Name = "Dropdown Frame"
 DropdownFrame.BorderSizePixel = 0
 DropdownFrame.Position = UDim2.new(0.075, 0, 0.1, 0)
-DropdownFrame.Size = UDim2.new(0.15, 0, 0.8, 0)
+DropdownFrame.Size = UDim2.new(0.15, 0, 0.08 * MainBtns, 0)
 DropdownFrame.BackgroundTransparency = 0
 DropdownFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 DropdownFrame.Visible = false
@@ -542,7 +566,13 @@ fly.MouseButton1Click:Connect(function()
 	fly.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
 	wait(0.1)
 	fly.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Fly.lua", true))()
+	if LP.Character:FindFirstChild("Humanoid") then
+		if LP.Character.Humanoid.RigType == Enum.HumanoidRigType.R6 then
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/R6Fly.lua", true))()
+		elseif LP.Character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Fly.lua", true))()
+		end
+	end
 end)
 
 UIS.InputBegan:Connect(function(input)
