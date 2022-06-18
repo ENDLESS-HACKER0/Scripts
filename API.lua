@@ -61,7 +61,7 @@ function API:trace(target)
 					if LP.Character.HumanoidRootPart:FindFirstChild(tostring(person)) then
 						LP.Character.HumanoidRootPart:FindFirstChild(tostring(person)):Destroy()
 					end
-					
+
 					local line  = Instance.new("Beam")
 					local A0 = Instance.new("Attachment")
 					local A1 = Instance.new("Attachment")
@@ -140,12 +140,25 @@ function API:RTX()
 			child:Destroy()
 		end
 	end
-
+	
+	for _, child in pairs(workspace.Terrain:GetChildren()) do
+		if child:IsA("Clouds") then
+			child:Destroy()
+		end
+	end
+	
+	local Clouds = Instance.new("Clouds")
 	local Blur = Instance.new("BlurEffect")
 	local CC = Instance.new("ColorCorrectionEffect")
 	local SR = Instance.new("SunRaysEffect")
 	local Bloom = Instance.new("BloomEffect")
-
+	
+	Clouds.Parent = workspace.Terrain
+	Clouds.Cover = 0.6
+	Clouds.Density = 1
+	Clouds.Name = "CloudsINSET"
+	Clouds.Color = Color3.fromRGB(255, 255, 255)
+	
 	Blur.Parent = lighting
 	Blur.Size = 3
 	Blur.Name = "BlurINSET"
@@ -171,7 +184,7 @@ end
 
 function API:SayChildren(parent)
 	warn('ClassName : Name')
-	
+
 	for _,child in pairs(parent:GetChildren()) do
 		if game.Players:FindFirstChild(child.Name) then
 			print('Player-Character : '..child.Name)
