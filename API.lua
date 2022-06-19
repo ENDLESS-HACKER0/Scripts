@@ -227,8 +227,8 @@ end
 
 function API:notify(par1, par2, par3)
     startergui:SetCore("SendNotification", {
-        Title = par1
-        Text = par2
+        Title = par1,
+        Text = par2,
         Duration = par3
     })
 end
