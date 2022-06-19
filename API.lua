@@ -7,6 +7,7 @@ local LP = players.LocalPlayer
 local camara = game:GetService("Workspace").Camera
 local pGUI = LP.PlayerGui
 local hum = LP.Character:WaitForChild("Humanoid")
+local startergui = game:GetService("StarterGui")
 
 function API:reset()
 	hum.Health = 0
@@ -222,6 +223,14 @@ function API:skybox(up, down, front, left, back, right)
 	skybox.SkyboxDn = "http://www.roblox.com/asset/?id="..tonumber(down)
 	skybox.SkyboxRt = "http://www.roblox.com/asset/?id="..tonumber(right)
 	skybox.SkyboxUp = "http://www.roblox.com/asset/?id="..tonumber(up)
+end
+
+function API:notify(par1, par2, par3)
+    startergui:SetCore("SendNotification", {
+        Title = par1
+        Text = par2
+        Duration = par3
+    })
 end
 
 return API
