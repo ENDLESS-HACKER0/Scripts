@@ -140,25 +140,25 @@ function API:RTX()
 			child:Destroy()
 		end
 	end
-	
+
 	for _, child in pairs(workspace.Terrain:GetChildren()) do
 		if child:IsA("Clouds") then
 			child:Destroy()
 		end
 	end
-	
+
 	local Clouds = Instance.new("Clouds")
 	local Blur = Instance.new("BlurEffect")
 	local CC = Instance.new("ColorCorrectionEffect")
 	local SR = Instance.new("SunRaysEffect")
 	local Bloom = Instance.new("BloomEffect")
-	
+
 	Clouds.Parent = workspace.Terrain
 	Clouds.Cover = 0.6
 	Clouds.Density = 1
 	Clouds.Name = "CloudsINSET"
 	Clouds.Color = Color3.fromRGB(255, 255, 255)
-	
+
 	Blur.Parent = lighting
 	Blur.Size = 3
 	Blur.Name = "BlurINSET"
@@ -205,6 +205,23 @@ function API:TeamCheck(plr)
 	elseif plr.Team == nil then
 		return 'No Team'
 	end
+end
+
+function API:skybox(up, down, front, left, back, right)
+	if lighting:FindFirstChild("Inset Client Skybox") then
+		lighting:FindFirstChild("Inset Client Skybox"):Destroy()
+	end
+
+	local skybox = Instance.new("Sky")
+
+	skybox.Parent = lighting
+	skybox.Name = "Inset Client Skybox"
+	skybox.SkyboxBk = "http://www.roblox.com/asset/?id="..tonumber(back)
+	skybox.SkyboxFt = "http://www.roblox.com/asset/?id="..tonumber(front)
+	skybox.SkyboxLf = "http://www.roblox.com/asset/?id="..tonumber(left)
+	skybox.SkyboxDn = "http://www.roblox.com/asset/?id="..tonumber(down)
+	skybox.SkyboxRt = "http://www.roblox.com/asset/?id="..tonumber(right)
+	skybox.SkyboxUp = "http://www.roblox.com/asset/?id="..tonumber(up)
 end
 
 return API
