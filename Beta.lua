@@ -591,4 +591,4 @@ UIS.InputBegan:Connect(function(input)
 	end
 end)
 
-InsetAPI:notify("Inset Beta Menu", "Click \"Insert\" to toggle", 3)
+InsetAPI:notify("Inset Beta Menu", "Click \"Insert\" to toggle", 6)
