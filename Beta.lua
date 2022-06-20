@@ -13,6 +13,7 @@ end
 
 --Vars
 local Main = Instance.new("ScreenGui")
+local DragFrame = Instance.new("Frame")
 local DropdownFrame = Instance.new("Frame")
 local DFGrid = Instance.new("UIGridLayout")
 
@@ -136,6 +137,7 @@ end
 
 --Parenting
 Main.Parent = pGUI
+DragFrame.Parent = Main
 DropdownFrame.Parent = Main
 DFGrid.Parent = DropdownFrame
 World.Parent = DropdownFrame
@@ -420,6 +422,65 @@ DropdownFrame.BackgroundTransparency = 0
 DropdownFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 DropdownFrame.Visible = false
 
+DragFrame.Name = "Drag Frame"
+DragFrame.BorderSizePixel = 0
+DragFrame.Position = UDim2.new(0.075, 0, 0.02, 0)
+DragFrame.Size = UDim2.new(0.15, 0, 0.08, 0)
+DragFrame.BackgroundTransparency = 0
+DragFrame.BackgroundColor3 = Color3.fromRGB(0, 255, 90)
+DragFrame.Visible = false
+
+local IsDragging = false
+local dragInput
+local StartingPoint
+local oldPos
+local divisionIntx = 1500
+local divisionInty = 630
+
+local function update(input)
+	local delta = input.Position - StartingPoint
+	local somemathX = oldPos.X.Scale + delta.X / divisionIntx
+	local somemathY = oldPos.Y.Scale + delta.Y / divisionInty
+	
+	--Main
+	DragFrame.Position = UDim2.new(somemathX, oldPos.X.Offset, somemathY, oldPos.Y.Offset)
+	DropdownFrame.Position = UDim2.new(somemathX, oldPos.X.Offset, somemathY + 0.08, oldPos.Y.Offset)
+	OtherFrame.Position = UDim2.new(somemathX + 0.15, oldPos.X.Offset, somemathY + 0.08, oldPos.Y.Offset)
+	PlayerFrame.Position = UDim2.new(somemathX + 0.15, oldPos.X.Offset, somemathY + 0.16, oldPos.Y.Offset)
+	RenderFrame.Position = UDim2.new(somemathX + 0.15, oldPos.X.Offset, somemathY + 0.24, oldPos.Y.Offset)
+	WorldFrame.Position = UDim2.new(somemathX + 0.15, oldPos.X.Offset, somemathY + 0.32, oldPos.Y.Offset)
+	
+	--Camera
+	CamaraFrame.Position = UDim2.new(oldPos.X.Scale + delta.X / divisionIntx + 0.3, oldPos.X.Offset, oldPos.Y.Scale + delta.Y / divisionInty + 0.32, oldPos.Y.Offset)
+	FOVFrame.Position = UDim2.new(oldPos.X.Scale + delta.X / divisionIntx + 0.45, oldPos.X.Offset, oldPos.Y.Scale + delta.Y / divisionInty + 0.32, oldPos.Y.Offset)
+	
+	--Jump
+	JumpFrame.Position = UDim2.new(oldPos.X.Scale + delta.X / divisionIntx + 0.3, oldPos.X.Offset, oldPos.Y.Scale + delta.Y / divisionInty + 0.16, oldPos.Y.Offset)
+	
+	--Speed
+	SpeedFrame.Position = UDim2.new(oldPos.X.Scale + delta.X / divisionIntx + 0.3, oldPos.X.Offset, oldPos.Y.Scale + delta.Y / divisionInty + 0.24, oldPos.Y.Offset)
+end
+
+DragFrame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		IsDragging = true
+		StartingPoint = input.Position
+		oldPos = DragFrame.Position
+
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				IsDragging = false
+			end
+		end)
+	end
+end)
+
+DragFrame.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement then
+		dragInput = input
+	end
+end)
+
 World.MouseButton1Click:Connect(function()
 	if WorldBV == true then
 		CollapseWorld()
@@ -596,14 +657,22 @@ UIS.InputBegan:Connect(function(input)
 		if ToggleBV == false then
 			ToggleBV = true
 			DropdownFrame.Visible = true
+			DragFrame.Visible = true
 		elseif ToggleBV == true then
 			ToggleBV = false
 			DropdownFrame.Visible = false
+			DragFrame.Visible = false
 			CollapseWorld()
 			CollapsePlayer()
 			CollapseRender()
 			CollapseOther()
 		end
+	end
+end)
+
+UIS.InputChanged:Connect(function(input)
+	if input == dragInput and IsDragging then
+		update(input)
 	end
 end)
 
