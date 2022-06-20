@@ -4,7 +4,7 @@ local UIS = game:GetService("UserInputService")
 
 --Player Vars
 local LP = game:GetService("Players").LocalPlayer
-local pGUI = LP.PlayerGui
+local pGUI = game.CoreGui
 
 --Destroy Old
 if pGUI:FindFirstChild("Inset Beta") then
@@ -51,6 +51,7 @@ local RenderFrame = Instance.new("Frame")
 local RenderGrid = Instance.new("UIGridLayout")
 local ESP = Instance.new("TextButton")
 local tracers = Instance.new("TextButton")
+local WayPoints = Instance.new("TextButton")
 
 --Other
 local Other = Instance.new("TextButton")
@@ -61,7 +62,7 @@ local fly = Instance.new("TextButton")
 --Number of Buttons
 local MainBtns = 4
 
-local RenderBtns = 2
+local RenderBtns = 3
 
 local OtherBtns = 1
 
@@ -163,6 +164,7 @@ RenderFrame.Parent = Main
 RenderGrid.Parent = RenderFrame
 ESP.Parent = RenderFrame
 tracers.Parent = RenderFrame
+WayPoints.Parent = RenderFrame
 Other.Parent = DropdownFrame
 OtherFrame.Parent = Main
 OtherGrid.Parent = OtherFrame
@@ -196,6 +198,13 @@ World.BorderSizePixel = 0
 World.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 World.TextColor3 = Color3.fromRGB(255, 255, 255)
 World.TextScaled = true
+
+WayPoints.Name = "Way Points Toggle"
+WayPoints.Text = "Way Points"
+WayPoints.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+WayPoints.TextScaled = true
+WayPoints.TextColor3 = Color3.fromRGB(255, 255, 255)
+WayPoints.BorderSizePixel = 0
 
 tracers.Name = "Tracers Toggle"
 tracers.Text = "Tracers"
@@ -549,6 +558,13 @@ tracers.MouseButton1Click:Connect(function()
 	end
 end)
 
+WayPoints.MouseButton1Click:Connect(function()
+	WayPoints.BackgroundColor3 = Color3.fromRGB(0, 125, 64)
+	wait(0.1)
+	WayPoints.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ENDLESS-HACKER0/Scripts/main/Way%20Points.lua", true))()
+end)
+
 Other.MouseButton1Click:Connect(function()
 	if OtherBV == true then
 		CollapseOther()
@@ -591,4 +607,4 @@ UIS.InputBegan:Connect(function(input)
 	end
 end)
 
-InsetAPI:notify("Inset Beta Menu", "Click \"Insert\" to toggle", 6)
+InsetAPI:notify("Inset Beta Menu", "Press \"Insert\" to toggle", 6)
