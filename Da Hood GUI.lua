@@ -51,19 +51,6 @@ AutoRobDh.TextSize = 14.000
 AutoRobDh.MouseButton1Down:connect(function()
 loadstring(game:HttpGet('https://pastebin.com/raw/3L5CTn8J'))() 
 end)
---example true
-
-
-
-
-
-
-
-
-
-
-
-
 
 Close.Name = "Close"
 Close.Parent = Main
