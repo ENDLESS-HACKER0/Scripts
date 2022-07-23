@@ -451,14 +451,14 @@ local function update(input)
 	WorldFrame.Position = UDim2.new(somemathX + 0.15, oldPos.X.Offset, somemathY + 0.32, oldPos.Y.Offset)
 	
 	--Camera
-	CamaraFrame.Position = UDim2.new(oldPos.X.Scale + delta.X / divisionIntx + 0.3, oldPos.X.Offset, oldPos.Y.Scale + delta.Y / divisionInty + 0.32, oldPos.Y.Offset)
-	FOVFrame.Position = UDim2.new(oldPos.X.Scale + delta.X / divisionIntx + 0.45, oldPos.X.Offset, oldPos.Y.Scale + delta.Y / divisionInty + 0.32, oldPos.Y.Offset)
+	CamaraFrame.Position = UDim2.new(somemathX + 0.3, oldPos.X.Offset, somemathY + 0.32, oldPos.Y.Offset)
+	FOVFrame.Position = UDim2.new(somemathX + 0.45, oldPos.X.Offset, somemathY + 0.32, oldPos.Y.Offset)
 	
 	--Jump
-	JumpFrame.Position = UDim2.new(oldPos.X.Scale + delta.X / divisionIntx + 0.3, oldPos.X.Offset, oldPos.Y.Scale + delta.Y / divisionInty + 0.16, oldPos.Y.Offset)
+	JumpFrame.Position = UDim2.new(somemathX + 0.3, oldPos.X.Offset, somemathY + 0.16, oldPos.Y.Offset)
 	
 	--Speed
-	SpeedFrame.Position = UDim2.new(oldPos.X.Scale + delta.X / divisionIntx + 0.3, oldPos.X.Offset, oldPos.Y.Scale + delta.Y / divisionInty + 0.24, oldPos.Y.Offset)
+	SpeedFrame.Position = UDim2.new(somemathX + 0.3, oldPos.X.Offset, somemathY + 0.24, oldPos.Y.Offset)
 end
 
 DragFrame.InputBegan:Connect(function(input)
@@ -472,6 +472,20 @@ DragFrame.InputBegan:Connect(function(input)
 				IsDragging = false
 			end
 		end)
+	elseif input.UserInputType == Enum.UserInputType.MouseButton2 then
+		if ToggleBV == false then
+			ToggleBV = true
+			DropdownFrame.Visible = true
+			DragFrame.Visible = true
+		elseif ToggleBV == true then
+			ToggleBV = false
+			DropdownFrame.Visible = false
+			DragFrame.Visible = false
+			CollapseWorld()
+			CollapsePlayer()
+			CollapseRender()
+			CollapseOther()
+		end
 	end
 end)
 
